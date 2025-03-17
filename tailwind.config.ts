@@ -122,8 +122,26 @@ export default {
 				'float': 'float 3s ease-in-out infinite',
 				'matrix-fall': 'matrix-fall 10s linear infinite',
 				'pulse-neon': 'pulse-neon 2s ease-in-out infinite'
+			},
+			// Add backface-visibility utility
+			backfaceVisibility: {
+				hidden: 'hidden',
+				visible: 'visible',
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities }) {
+			const newUtilities = {
+				'.backface-hidden': {
+					'backface-visibility': 'hidden',
+				},
+				'.backface-visible': {
+					'backface-visibility': 'visible',
+				},
+			}
+			addUtilities(newUtilities)
+		}
+	],
 } satisfies Config;
