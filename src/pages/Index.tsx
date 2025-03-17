@@ -16,20 +16,44 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Simulate boot sequence
+    // Simulate boot sequence with a more dramatic reveal
     const interval = setInterval(() => {
       setBootPercentage(prev => {
         if (prev >= 100) {
           clearInterval(interval);
+          
+          // Add a flash effect before transition
+          document.body.classList.add('flash');
           setTimeout(() => {
+            document.body.classList.remove('flash');
             setBootSequenceComplete(true);
-            setTimeout(() => setShowContent(true), 500);
-          }, 500);
+            setTimeout(() => setShowContent(true), 300);
+          }, 300);
+          
           return 100;
         }
-        return prev + Math.floor(Math.random() * 10) + 1;
+        
+        // Non-linear progression for more dynamic feel
+        const increment = Math.floor(Math.random() * 5) + 
+                          Math.max(1, Math.floor((100 - prev) / 20));
+        return Math.min(100, prev + increment);
       });
-    }, 100);
+    }, 120);
+    
+    // Add some audio feedback for immersion (optional)
+    const playBootSound = () => {
+      try {
+        const audio = new Audio('/boot-sound.mp3');
+        audio.volume = 0.3;
+        audio.play().catch(() => {
+          // Silent fail - browsers may block autoplay
+        });
+      } catch (e) {
+        // Fallback silently if audio fails
+      }
+    };
+    
+    playBootSound();
     
     return () => clearInterval(interval);
   }, []);
@@ -78,11 +102,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden">
       {!bootSequenceComplete ? (
-        // Boot Sequence Screen
-        <div className="min-h-screen flex flex-col items-center justify-center p-4 font-cyber">
-          <div className="w-full max-w-md">
+        // Boot Sequence Screen with enhanced animation
+        <div className="min-h-screen flex flex-col items-center justify-center p-4 font-cyber relative">
+          <MatrixBackground />
+          <div className="w-full max-w-md z-10">
             <div className="mb-6 text-neon-green">
-              <p>$ initiating_system_boot</p>
+              <p className="glitch-text">$ initiating_system_boot</p>
               <p>$ loading_core_modules</p>
               <p>$ verifying_integrity</p>
               <p>$ establishing_connection</p>
@@ -96,10 +121,18 @@ const Index = () => {
               />
             </div>
             
-            <div className="flex justify-between text-sm text-neon-blue">
-              <span>PR_OS v3.5</span>
-              <span>{bootPercentage}%</span>
+            <div className="flex justify-between text-sm">
+              <span className="text-neon-blue">PR_OS v3.5</span>
+              <span className="text-neon-pink">{bootPercentage}%</span>
             </div>
+            
+            {bootPercentage > 60 && (
+              <div className="mt-8 text-xs text-neon-green opacity-80">
+                <p>Initializing matrix protocols...</p>
+                <p>Establishing neural network connections...</p>
+                <p>Configuring digital interface...</p>
+              </div>
+            )}
           </div>
         </div>
       ) : (

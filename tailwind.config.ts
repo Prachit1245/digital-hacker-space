@@ -111,6 +111,26 @@ export default {
 				'pulse-neon': {
 					'0%, 100%': { 'box-shadow': '0 0 10px 2px var(--neon-color)' },
 					'50%': { 'box-shadow': '0 0 20px 5px var(--neon-color)' }
+				},
+				'flicker': {
+					'0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': { 
+						opacity: '0.95',
+						filter: 'brightness(1)'
+					},
+					'20%, 24%, 55%': { 
+						opacity: '0.2',
+						filter: 'brightness(1.5)' 
+					}
+				},
+				'pulse-glow': {
+					'0%, 100%': { 
+						opacity: '1',
+						textShadow: '0 0 10px var(--neon-color), 0 0 20px var(--neon-color)'
+					},
+					'50%': { 
+						opacity: '0.7',
+						textShadow: '0 0 5px var(--neon-color), 0 0 10px var(--neon-color)'
+					}
 				}
 			},
 			animation: {
@@ -121,7 +141,9 @@ export default {
 				'glitch': 'glitch 0.5s ease infinite',
 				'float': 'float 3s ease-in-out infinite',
 				'matrix-fall': 'matrix-fall 10s linear infinite',
-				'pulse-neon': 'pulse-neon 2s ease-in-out infinite'
+				'pulse-neon': 'pulse-neon 2s ease-in-out infinite',
+				'flicker': 'flicker 4s linear infinite',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
 			},
 			// Add backface-visibility utility
 			backfaceVisibility: {
@@ -140,6 +162,30 @@ export default {
 				'.backface-visible': {
 					'backface-visibility': 'visible',
 				},
+				'.flash': {
+					animation: 'flash 0.5s',
+				},
+				'.glitch-text': {
+					position: 'relative',
+					'&::before, &::after': {
+						content: 'attr(data-text)',
+						position: 'absolute',
+						top: '0',
+						left: '0',
+						width: '100%',
+						height: '100%'
+					},
+					'&::before': {
+						left: '2px',
+						textShadow: '-2px 0 #ff00c1',
+						animation: 'glitch-anim-1 2s infinite linear alternate-reverse'
+					},
+					'&::after': {
+						left: '-2px',
+						textShadow: '2px 0 #00fff9',
+						animation: 'glitch-anim-2 3s infinite linear alternate-reverse'
+					}
+				}
 			}
 			addUtilities(newUtilities)
 		}
