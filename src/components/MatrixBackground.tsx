@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const MatrixBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [density, setDensity] = useState<number>(20); // Higher density (smaller value) for more streams
+  const [density, setDensity] = useState<number>(15); // Higher density (smaller value) for more streams
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -32,32 +32,43 @@ const MatrixBackground = () => {
         createStream(container, containerHeight, codeChars, Math.random() * containerWidth);
         
         // Remove old streams to prevent too many elements (improved performance)
-        if (container.children.length > 150) {
+        if (container.children.length > 200) {
           container.removeChild(container.children[0]);
         }
       } else {
         clearInterval(interval);
       }
-    }, 200); // Faster interval for more dynamic feel
+    }, 150); // Faster interval for more dynamic feel
     
     // Create "rain" effect - periodic bursts of streams
     const rainInterval = setInterval(() => {
       if (document.body.contains(container)) {
-        // Create a burst of 5-10 streams at once
-        const burstCount = Math.floor(Math.random() * 8) + 5;
+        // Create a burst of streams at once
+        const burstCount = Math.floor(Math.random() * 12) + 8;
         for (let i = 0; i < burstCount; i++) {
           createStream(container, containerHeight, codeChars, Math.random() * containerWidth);
         }
       } else {
         clearInterval(rainInterval);
       }
-    }, 2000); // Every 2 seconds
+    }, 1500); // Every 1.5 seconds
+    
+    // Create special highlighted "Prachit Regmi" streams periodically
+    const specialStreamInterval = setInterval(() => {
+      if (document.body.contains(container)) {
+        const xPos = Math.random() * containerWidth;
+        const specialContent = "PRACHIT REGMI CSIT DEVELOPER TECH";
+        createSpecialStream(container, containerHeight, specialContent, xPos);
+      } else {
+        clearInterval(specialStreamInterval);
+      }
+    }, 3000); // Every 3 seconds
     
     // Handle window resize
     const handleResize = () => {
       if (container) {
         // Adjust density based on window width for responsive behavior
-        const newDensity = window.innerWidth < 768 ? 35 : 20;
+        const newDensity = window.innerWidth < 768 ? 30 : 15;
         setDensity(newDensity);
         
         // Clear and recreate streams
@@ -74,6 +85,7 @@ const MatrixBackground = () => {
     return () => {
       clearInterval(interval);
       clearInterval(rainInterval);
+      clearInterval(specialStreamInterval);
       window.removeEventListener('resize', handleResize);
     };
   }, [density]);
@@ -87,7 +99,7 @@ const MatrixBackground = () => {
     stream.style.left = `${xPosition}px`;
     
     // Vary animation speed for more natural look
-    const speed = Math.random() * 10 + 3; // between 3-13s
+    const speed = Math.random() * 12 + 5; // between 5-17s
     stream.style.animationDuration = `${speed}s`;
     
     // Randomize delay
@@ -140,7 +152,7 @@ const MatrixBackground = () => {
     container.appendChild(stream);
     
     // Change characters periodically for some streams to create a "typing" effect
-    if (Math.random() > 0.7) { // 30% of streams will have changing characters
+    if (Math.random() > 0.6) { // 40% of streams will have changing characters
       const changeInterval = setInterval(() => {
         if (document.body.contains(stream)) {
           const charIndex = Math.floor(Math.random() * length);
@@ -152,13 +164,42 @@ const MatrixBackground = () => {
         } else {
           clearInterval(changeInterval);
         }
-      }, 100 + Math.random() * 400); // Random interval between changes
+      }, 100 + Math.random() * 300); // Random interval between changes
       
       // Clear interval after the animation is likely to be done
       setTimeout(() => {
         clearInterval(changeInterval);
       }, speed * 1000 + 2000);
     }
+  };
+  
+  // Special stream for "Prachit Regmi" with enhanced visual effects
+  const createSpecialStream = (container: HTMLDivElement, containerHeight: number, specialText: string, xPosition: number) => {
+    const stream = document.createElement('div');
+    stream.className = 'matrix-text special-stream';
+    
+    // Position
+    stream.style.left = `${xPosition}px`;
+    
+    // Animation properties
+    const speed = Math.random() * 10 + 8; // slightly slower to be more noticeable
+    stream.style.animationDuration = `${speed}s`;
+    stream.style.animationDelay = `${Math.random() * 1.5}s`;
+    
+    // Random letter spacing for a more dramatic effect
+    stream.style.letterSpacing = `${Math.random() * 0.2 + 0.1}em`;
+    
+    // Generate the special text stream with all characters highlighted
+    let formattedText = '';
+    for (let j = 0; j < specialText.length; j++) {
+      formattedText += `<span class="special-highlight">${specialText[j]}</span>`;
+    }
+    
+    stream.innerHTML = formattedText;
+    stream.style.opacity = (Math.random() * 0.3 + 0.7).toString(); // More visible
+    stream.style.fontSize = `calc(${Math.random() * 0.3 + 1.1}em)`; // Larger
+    
+    container.appendChild(stream);
   };
   
   return (
