@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -18,13 +17,13 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Simulate boot sequence with a more dramatic reveal
+    window.scrollTo(0, 0);
+    
     const interval = setInterval(() => {
       setBootPercentage(prev => {
         if (prev >= 100) {
           clearInterval(interval);
           
-          // Add a flash effect before transition
           document.body.classList.add('flash');
           setTimeout(() => {
             document.body.classList.remove('flash');
@@ -35,23 +34,19 @@ const Index = () => {
           return 100;
         }
         
-        // Non-linear progression for more dynamic feel
         const increment = Math.floor(Math.random() * 5) + 
                           Math.max(1, Math.floor((100 - prev) / 20));
         return Math.min(100, prev + increment);
       });
     }, 120);
     
-    // Add some audio feedback for immersion (optional)
     const playBootSound = () => {
       try {
         const audio = new Audio('/boot-sound.mp3');
         audio.volume = 0.3;
         audio.play().catch(() => {
-          // Silent fail - browsers may block autoplay
         });
       } catch (e) {
-        // Fallback silently if audio fails
       }
     };
     
@@ -104,7 +99,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden">
       {!bootSequenceComplete ? (
-        // Boot Sequence Screen with enhanced animation
         <div className="min-h-screen flex flex-col items-center justify-center p-4 font-cyber relative">
           <MatrixBackground />
           <div className="w-full max-w-md z-10">
@@ -138,14 +132,12 @@ const Index = () => {
           </div>
         </div>
       ) : (
-        // Main Content
         <>
           <MatrixBackground />
           <Navbar />
           
           {showContent && (
             <>
-              {/* Welcome Section */}
               <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20">
                 <div className="relative z-10 text-center max-w-3xl mx-auto">
                   <div className="mb-8 profile-image-container inline-block">
@@ -209,7 +201,6 @@ const Index = () => {
                 <CyberCube />
               </section>
               
-              {/* About Section with Terminal */}
               <section id="about" className="py-20 px-4 sm:px-6 relative">
                 <div className="max-w-6xl mx-auto">
                   <h2 className="text-3xl font-bold text-gradient mb-12 text-center">About Me</h2>
@@ -248,7 +239,6 @@ const Index = () => {
                 </div>
               </section>
               
-              {/* Projects Section */}
               <section id="projects" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
                 <div className="max-w-6xl mx-auto">
                   <h2 className="text-3xl font-bold text-gradient mb-4 text-center">Featured Projects</h2>
@@ -282,7 +272,6 @@ const Index = () => {
                 </div>
               </section>
               
-              {/* Skills Section */}
               <section id="skills" className="py-20 px-4 sm:px-6 relative">
                 <div className="max-w-6xl mx-auto">
                   <div className="mb-12 text-center">
@@ -293,7 +282,6 @@ const Index = () => {
                 </div>
               </section>
               
-              {/* Contact Section */}
               <section id="contact" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
                 <div className="max-w-6xl mx-auto">
                   <div className="mb-12 text-center">
@@ -304,7 +292,6 @@ const Index = () => {
                 </div>
               </section>
               
-              {/* Footer */}
               <footer className="py-8 px-4 sm:px-6 border-t border-neon-blue/30">
                 <div className="max-w-6xl mx-auto text-center">
                   <p className="text-gray-400 mb-4">

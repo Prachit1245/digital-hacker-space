@@ -106,7 +106,7 @@
 
   .matrix-text-container {
     @apply relative overflow-hidden;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
     background-image: 
       linear-gradient(0deg, rgba(16, 18, 27, 0.7) 0%, 
                       rgba(16, 18, 27, 0.3) 50%, 
@@ -116,40 +116,40 @@
   .matrix-text {
     @apply font-cyber text-xs absolute whitespace-nowrap;
     color: theme('colors.neon.green');
-    text-shadow: 0 0 2px theme('colors.neon.green');
+    text-shadow: 0 0 3px theme('colors.neon.green');
     animation: matrix-fall linear forwards;
-    opacity: 0.4;
+    opacity: 0.5;
     letter-spacing: 0.1em;
     line-height: 1.2;
   }
   
   .matrix-text .highlight {
     color: #ffffff;
-    text-shadow: 0 0 8px theme('colors.neon.green'), 0 0 12px theme('colors.neon.green');
+    text-shadow: 0 0 10px theme('colors.neon.green'), 0 0 15px theme('colors.neon.green');
     opacity: 1;
     animation: pulse-character 1.5s infinite alternate;
   }
   
   .matrix-text .highlight-medium {
     color: #c0ffce;
-    text-shadow: 0 0 5px theme('colors.neon.green');
-    opacity: 0.9;
+    text-shadow: 0 0 7px theme('colors.neon.green');
+    opacity: 0.95;
   }
   
   .matrix-text .highlight-subtle {
     color: #60d67e;
-    text-shadow: 0 0 3px theme('colors.neon.green');
-    opacity: 0.8;
+    text-shadow: 0 0 4px theme('colors.neon.green');
+    opacity: 0.85;
   }
   
   .special-stream {
-    z-index: 1;
+    z-index: 2;
     font-weight: bold;
   }
   
   .special-highlight {
     color: theme('colors.neon.blue');
-    text-shadow: 0 0 8px theme('colors.neon.blue'), 0 0 15px theme('colors.neon.blue');
+    text-shadow: 0 0 10px theme('colors.neon.blue'), 0 0 20px theme('colors.neon.blue');
     opacity: 1;
     animation: special-pulse 2s infinite alternate;
   }
@@ -208,7 +208,6 @@
     filter: hue-rotate(90deg) brightness(1.1) contrast(1.5);
   }
   
-  /* New cyberpunk neon styles */
   .neon-glow {
     @apply relative;
   }
@@ -263,10 +262,10 @@
     transform: translateY(-100%);
     opacity: 0; 
   }
-  10% { opacity: 0.4; }
-  20% { opacity: 0.7; }
-  50% { opacity: 0.4; }
-  80% { opacity: 0.2; }
+  10% { opacity: 0.6; }
+  20% { opacity: 0.8; }
+  50% { opacity: 0.6; }
+  80% { opacity: 0.3; }
   100% { 
     transform: translateY(1000px);
     opacity: 0; 
@@ -280,7 +279,7 @@
   }
   50% {
     opacity: 1;
-    transform: scale(1.2);
+    transform: scale(1.3);
   }
   100% {
     opacity: 1;
@@ -291,15 +290,15 @@
 @keyframes special-pulse {
   0% {
     opacity: 0.8;
-    text-shadow: 0 0 5px theme('colors.neon.blue');
+    text-shadow: 0 0 8px theme('colors.neon.blue');
   }
   50% {
     opacity: 1;
-    text-shadow: 0 0 15px theme('colors.neon.blue'), 0 0 20px theme('colors.neon.blue');
+    text-shadow: 0 0 20px theme('colors.neon.blue'), 0 0 30px theme('colors.neon.blue');
   }
   100% {
     opacity: 0.8;
-    text-shadow: 0 0 5px theme('colors.neon.blue');
+    text-shadow: 0 0 8px theme('colors.neon.blue');
   }
 }
 

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const MatrixBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [density, setDensity] = useState<number>(15); // Higher density (smaller value) for more streams
+  const [density, setDensity] = useState<number>(12); // Higher density (smaller value) for more streams
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -32,26 +32,26 @@ const MatrixBackground = () => {
         createStream(container, containerHeight, codeChars, Math.random() * containerWidth);
         
         // Remove old streams to prevent too many elements (improved performance)
-        if (container.children.length > 200) {
+        if (container.children.length > 300) {
           container.removeChild(container.children[0]);
         }
       } else {
         clearInterval(interval);
       }
-    }, 150); // Faster interval for more dynamic feel
+    }, 100); // Faster interval for more dynamic feel
     
     // Create "rain" effect - periodic bursts of streams
     const rainInterval = setInterval(() => {
       if (document.body.contains(container)) {
         // Create a burst of streams at once
-        const burstCount = Math.floor(Math.random() * 12) + 8;
+        const burstCount = Math.floor(Math.random() * 15) + 10;
         for (let i = 0; i < burstCount; i++) {
           createStream(container, containerHeight, codeChars, Math.random() * containerWidth);
         }
       } else {
         clearInterval(rainInterval);
       }
-    }, 1500); // Every 1.5 seconds
+    }, 1200); // Every 1.2 seconds
     
     // Create special highlighted "Prachit Regmi" streams periodically
     const specialStreamInterval = setInterval(() => {
@@ -62,13 +62,13 @@ const MatrixBackground = () => {
       } else {
         clearInterval(specialStreamInterval);
       }
-    }, 3000); // Every 3 seconds
+    }, 2500); // Every 2.5 seconds
     
     // Handle window resize
     const handleResize = () => {
       if (container) {
         // Adjust density based on window width for responsive behavior
-        const newDensity = window.innerWidth < 768 ? 30 : 15;
+        const newDensity = window.innerWidth < 768 ? 20 : 12;
         setDensity(newDensity);
         
         // Clear and recreate streams
@@ -99,14 +99,14 @@ const MatrixBackground = () => {
     stream.style.left = `${xPosition}px`;
     
     // Vary animation speed for more natural look
-    const speed = Math.random() * 12 + 5; // between 5-17s
+    const speed = Math.random() * 10 + 4; // between 4-14s (faster)
     stream.style.animationDuration = `${speed}s`;
     
     // Randomize delay
-    stream.style.animationDelay = `${Math.random() * 2}s`;
+    stream.style.animationDelay = `${Math.random() * 1.5}s`;
     
     // More varied stream length based on screen height
-    const length = Math.floor(Math.random() * 30 + Math.min(40, containerHeight / 20));
+    const length = Math.floor(Math.random() * 30 + Math.min(50, containerHeight / 15));
     
     // Generate characters
     let streamText = '';
@@ -116,7 +116,7 @@ const MatrixBackground = () => {
     
     // Create multiple highlight points for more dramatic effect
     const highlightIndices = [];
-    const numHighlights = Math.floor(Math.random() * 3) + 1; // 1-3 highlights per stream
+    const numHighlights = Math.floor(Math.random() * 4) + 2; // 2-5 highlights per stream (more highlights)
     
     for (let i = 0; i < numHighlights; i++) {
       highlightIndices.push(Math.floor(Math.random() * length));
@@ -142,17 +142,17 @@ const MatrixBackground = () => {
     
     stream.innerHTML = formattedText;
     
-    // Random opacity for varied appearance
-    stream.style.opacity = (Math.random() * 0.6 + 0.2).toString();
+    // Higher base opacity for more visibility
+    stream.style.opacity = (Math.random() * 0.7 + 0.3).toString();
     
     // Random font size variation for depth effect
-    const sizeVariation = Math.random() * 0.5 + 0.8; // 0.8-1.3x size
+    const sizeVariation = Math.random() * 0.5 + 0.9; // 0.9-1.4x size (slightly larger)
     stream.style.fontSize = `calc(${sizeVariation}em)`;
     
     container.appendChild(stream);
     
     // Change characters periodically for some streams to create a "typing" effect
-    if (Math.random() > 0.6) { // 40% of streams will have changing characters
+    if (Math.random() > 0.4) { // 60% of streams will have changing characters (increased)
       const changeInterval = setInterval(() => {
         if (document.body.contains(stream)) {
           const charIndex = Math.floor(Math.random() * length);
@@ -164,7 +164,7 @@ const MatrixBackground = () => {
         } else {
           clearInterval(changeInterval);
         }
-      }, 100 + Math.random() * 300); // Random interval between changes
+      }, 100 + Math.random() * 200); // Random interval between changes (faster)
       
       // Clear interval after the animation is likely to be done
       setTimeout(() => {
@@ -182,7 +182,7 @@ const MatrixBackground = () => {
     stream.style.left = `${xPosition}px`;
     
     // Animation properties
-    const speed = Math.random() * 10 + 8; // slightly slower to be more noticeable
+    const speed = Math.random() * 8 + 6; // slightly slower to be more noticeable
     stream.style.animationDuration = `${speed}s`;
     stream.style.animationDelay = `${Math.random() * 1.5}s`;
     
@@ -197,7 +197,7 @@ const MatrixBackground = () => {
     
     stream.innerHTML = formattedText;
     stream.style.opacity = (Math.random() * 0.3 + 0.7).toString(); // More visible
-    stream.style.fontSize = `calc(${Math.random() * 0.3 + 1.1}em)`; // Larger
+    stream.style.fontSize = `calc(${Math.random() * 0.4 + 1.2}em)`; // Larger
     
     container.appendChild(stream);
   };
