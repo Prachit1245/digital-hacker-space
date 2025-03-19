@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;400;500;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -195,6 +196,55 @@
     @apply animate-glitch;
     filter: hue-rotate(90deg) brightness(1.1) contrast(1.5);
   }
+  
+  /* New cyberpunk neon styles */
+  .neon-glow {
+    @apply relative;
+  }
+  
+  .neon-glow:before {
+    content: '';
+    @apply absolute inset-0 blur-md opacity-50;
+    background: radial-gradient(circle at center, var(--neon-color) 0%, transparent 70%);
+    z-index: -1;
+  }
+  
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  .cyber-text {
+    text-shadow: 
+      0 0 2px #fff,
+      0 0 4px var(--neon-color),
+      0 0 8px var(--neon-color);
+  }
+  
+  .cyber-border {
+    @apply relative rounded-md overflow-hidden;
+  }
+  
+  .cyber-border:before {
+    content: '';
+    @apply absolute inset-0 rounded-md;
+    padding: 1px;
+    background: linear-gradient(90deg, theme('colors.neon.blue'), theme('colors.neon.purple'), theme('colors.neon.pink'), theme('colors.neon.blue'));
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: 200% 100%;
+    animation: borderAnimation 4s linear infinite;
+  }
+}
+
+@keyframes borderAnimation {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
 }
 
 @keyframes matrix-fall {
