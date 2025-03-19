@@ -127,6 +127,19 @@
     color: #ffffff;
     text-shadow: 0 0 8px theme('colors.neon.green'), 0 0 12px theme('colors.neon.green');
     opacity: 1;
+    animation: pulse-character 1.5s infinite alternate;
+  }
+  
+  .matrix-text .highlight-medium {
+    color: #c0ffce;
+    text-shadow: 0 0 5px theme('colors.neon.green');
+    opacity: 0.9;
+  }
+  
+  .matrix-text .highlight-subtle {
+    color: #60d67e;
+    text-shadow: 0 0 3px theme('colors.neon.green');
+    opacity: 0.8;
   }
 
   .terminal-window {
@@ -190,12 +203,27 @@
     opacity: 0; 
   }
   10% { opacity: 0.4; }
-  20% { opacity: 0.6; }
+  20% { opacity: 0.7; }
   50% { opacity: 0.4; }
   80% { opacity: 0.2; }
   100% { 
     transform: translateY(1000px);
     opacity: 0; 
+  }
+}
+
+@keyframes pulse-character {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

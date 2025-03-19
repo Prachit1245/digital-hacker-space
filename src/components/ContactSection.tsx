@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Send, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Send, Github, Linkedin, Mail, Twitter, Phone } from 'lucide-react';
 import TypewriterText from './TypewriterText';
 
 interface ContactSectionProps {
@@ -142,7 +142,17 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-400">Email</h4>
-                  <p className="text-neon-blue">prachit.regmi@example.com</p>
+                  <p className="text-neon-blue">prachitregmi456@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-neon-orange/20 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5 text-neon-orange" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-gray-400">Phone</h4>
+                  <p className="text-neon-orange">+977 9843681979</p>
                 </div>
               </div>
               
@@ -152,8 +162,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-400">GitHub</h4>
-                  <a href="https://github.com/prachitregmi" target="_blank" rel="noopener noreferrer" className="text-neon-purple hover:underline">
-                    github.com/prachitregmi
+                  <a href="https://github.com/Prachit1245" target="_blank" rel="noopener noreferrer" className="text-neon-purple hover:underline">
+                    github.com/Prachit1245
                   </a>
                 </div>
               </div>
