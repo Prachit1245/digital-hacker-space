@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -17,7 +18,10 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    // Force scroll to top on initial render
     window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     
     const interval = setInterval(() => {
       setBootPercentage(prev => {
@@ -28,7 +32,19 @@ const Index = () => {
           setTimeout(() => {
             document.body.classList.remove('flash');
             setBootSequenceComplete(true);
-            setTimeout(() => setShowContent(true), 300);
+            
+            // Ensure we're at the top
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            
+            setTimeout(() => {
+              setShowContent(true);
+              // Force scroll to top one more time after content loads
+              window.scrollTo(0, 0);
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+            }, 100);
           }, 300);
           
           return 100;
@@ -45,15 +61,31 @@ const Index = () => {
         const audio = new Audio('/boot-sound.mp3');
         audio.volume = 0.3;
         audio.play().catch(() => {
+          console.log('Audio play failed (this is expected if user hasn\'t interacted)');
         });
       } catch (e) {
+        console.log('Audio error (can be ignored):', e);
       }
     };
     
     playBootSound();
     
+    // Additional scroll to top when component mounts
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    
     return () => clearInterval(interval);
   }, []);
+  
+  // Add an extra useEffect to ensure scroll position after component is fully mounted
+  useEffect(() => {
+    if (showContent) {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  }, [showContent]);
   
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');

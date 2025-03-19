@@ -31,8 +31,19 @@
     <link rel="canonical" href="https://prachitregmi.com/" />
     
     <!-- Additional SEO Meta Tags -->
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="googlebot" content="index, follow" />
+    <meta name="google" content="notranslate" />
+    
+    <!-- Improved SEO for "Prachit Regmi" -->
+    <meta name="subject" content="Prachit Regmi - Developer Portfolio" />
+    <meta name="copyright" content="Prachit Regmi" />
+    <meta name="language" content="English" />
+    <meta name="designer" content="Prachit Regmi" />
+    <meta name="publisher" content="Prachit Regmi" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+    <meta name="revisit-after" content="7 days" />
     
     <!-- Structured Data for Google Search -->
     <script type="application/ld+json">
@@ -56,7 +67,38 @@
           "addressRegion": "Bagmati",
           "addressCountry": "Nepal"
         },
-        "description": "CSIT student from Nepal with passion for technology, web development, and cybersecurity."
+        "description": "CSIT student from Nepal with passion for technology, web development, and cybersecurity.",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Tribhuvan University",
+          "sameAs": "https://tu.edu.np/"
+        },
+        "knowsAbout": ["Web Development", "Cybersecurity", "Data Analysis", "Programming", "Machine Learning"],
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Student Developer",
+          "occupationLocation": {
+            "@type": "City",
+            "name": "Kathmandu"
+          },
+          "skills": "Web Development, Cybersecurity, Data Analysis"
+        }
+      }
+    </script>
+    
+    <!-- Additional website structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://prachitregmi.com/",
+        "name": "Prachit Regmi Portfolio",
+        "description": "Official portfolio website of Prachit Regmi, a CSIT student and tech enthusiast from Nepal",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://prachitregmi.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     </script>
   </head>
