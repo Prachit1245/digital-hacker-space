@@ -106,41 +106,41 @@
 
   .matrix-text-container {
     @apply relative overflow-hidden;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(0, 0, 0, 0.97);
     background-image: 
-      linear-gradient(0deg, rgba(16, 18, 27, 0.7) 0%, 
-                      rgba(16, 18, 27, 0.3) 50%, 
-                      rgba(16, 18, 27, 0) 100%);
+      linear-gradient(0deg, rgba(16, 18, 27, 0.8) 0%, 
+                      rgba(16, 18, 27, 0.4) 50%, 
+                      rgba(16, 18, 27, 0.1) 100%);
     z-index: -1;
   }
   
   .matrix-text {
     @apply font-cyber text-sm absolute whitespace-nowrap;
     color: theme('colors.neon.green');
-    text-shadow: 0 0 5px theme('colors.neon.green');
+    text-shadow: 0 0 8px theme('colors.neon.green');
     animation: matrix-fall linear forwards;
-    opacity: 0.8;
+    opacity: 0.9;
     letter-spacing: 0.1em;
     line-height: 1.2;
   }
   
   .matrix-text .highlight {
     color: #ffffff;
-    text-shadow: 0 0 15px theme('colors.neon.green'), 0 0 20px theme('colors.neon.green');
+    text-shadow: 0 0 20px theme('colors.neon.green'), 0 0 30px theme('colors.neon.green');
     opacity: 1;
     animation: pulse-character 1.5s infinite alternate;
   }
   
   .matrix-text .highlight-medium {
-    color: #c0ffce;
-    text-shadow: 0 0 10px theme('colors.neon.green');
-    opacity: 0.95;
+    color: #d0ffe5;
+    text-shadow: 0 0 15px theme('colors.neon.green');
+    opacity: 0.97;
   }
   
   .matrix-text .highlight-subtle {
-    color: #60d67e;
-    text-shadow: 0 0 8px theme('colors.neon.green');
-    opacity: 0.9;
+    color: #80e89e;
+    text-shadow: 0 0 12px theme('colors.neon.green');
+    opacity: 0.95;
   }
   
   .special-stream {
@@ -150,7 +150,7 @@
   
   .special-highlight {
     color: theme('colors.neon.blue');
-    text-shadow: 0 0 15px theme('colors.neon.blue'), 0 0 25px theme('colors.neon.blue');
+    text-shadow: 0 0 20px theme('colors.neon.blue'), 0 0 35px theme('colors.neon.blue');
     opacity: 1;
     animation: special-pulse 2s infinite alternate;
   }
@@ -261,15 +261,15 @@
 @keyframes matrix-fall {
   0% { 
     transform: translateY(-100%);
-    opacity: 0.2;
+    opacity: 0.6;
   }
-  5% { opacity: 0.8; }
-  20% { opacity: 0.9; }
-  50% { opacity: 0.8; }
-  80% { opacity: 0.6; }
+  5% { opacity: 0.9; }
+  20% { opacity: 0.95; }
+  50% { opacity: 0.9; }
+  80% { opacity: 0.8; }
   100% { 
     transform: translateY(1000px);
-    opacity: 0; 
+    opacity: 0.1; 
   }
 }
 
@@ -277,29 +277,32 @@
   0% {
     opacity: 1;
     transform: scale(1);
+    text-shadow: 0 0 15px theme('colors.neon.green'), 0 0 20px theme('colors.neon.green');
   }
   50% {
     opacity: 1;
-    transform: scale(1.5);
+    transform: scale(1.8);
+    text-shadow: 0 0 25px theme('colors.neon.green'), 0 0 40px theme('colors.neon.green');
   }
   100% {
     opacity: 1;
     transform: scale(1);
+    text-shadow: 0 0 15px theme('colors.neon.green'), 0 0 20px theme('colors.neon.green');
   }
 }
 
 @keyframes special-pulse {
   0% {
-    opacity: 0.9;
-    text-shadow: 0 0 12px theme('colors.neon.blue');
+    opacity: 0.95;
+    text-shadow: 0 0 15px theme('colors.neon.blue'), 0 0 20px theme('colors.neon.blue');
   }
   50% {
     opacity: 1;
-    text-shadow: 0 0 25px theme('colors.neon.blue'), 0 0 35px theme('colors.neon.blue');
+    text-shadow: 0 0 35px theme('colors.neon.blue'), 0 0 45px theme('colors.neon.blue');
   }
   100% {
-    opacity: 0.9;
-    text-shadow: 0 0 12px theme('colors.neon.blue');
+    opacity: 0.95;
+    text-shadow: 0 0 15px theme('colors.neon.blue'), 0 0 20px theme('colors.neon.blue');
   }
 }
 
@@ -323,4 +326,3 @@
 #root {
   @apply w-full min-h-screen p-0 m-0;
 }
-

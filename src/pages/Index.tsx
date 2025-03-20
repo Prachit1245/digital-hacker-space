@@ -18,10 +18,14 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Force scroll to top on initial render
+    // Force scroll to top on initial render - using multiple methods to ensure it works
     window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Make sure scrolling is enabled
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
     
     const interval = setInterval(() => {
       setBootPercentage(prev => {
@@ -70,10 +74,17 @@ const Index = () => {
     
     playBootSound();
     
-    // Additional scroll to top when component mounts
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    // Additional scroll forcing with timeout to ensure it works after all rendering
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      
+      // Make sure the welcome section is visible
+      if (welcomeRef.current) {
+        welcomeRef.current.scrollIntoView({ block: 'start' });
+      }
+    }, 300);
     
     return () => clearInterval(interval);
   }, []);
@@ -81,9 +92,16 @@ const Index = () => {
   // Add an extra useEffect to ensure scroll position after component is fully mounted
   useEffect(() => {
     if (showContent) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'auto' });
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
+      
+      // Set the scroll position to top with a slight delay to ensure it works
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }, 200);
     }
   }, [showContent]);
   
@@ -129,7 +147,7 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden">
+    <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden" id="top">
       {!bootSequenceComplete ? (
         <div className="min-h-screen flex flex-col items-center justify-center p-4 font-cyber relative">
           <MatrixBackground />
