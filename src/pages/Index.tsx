@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -79,11 +78,16 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden" id="top">
+    <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden relative" id="top">
       <MatrixBackground />
+      
+      <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
+      
       <Navbar />
       
       <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20">
+        <div className="absolute inset-0 bg-gradient-radial from-neon-blue/5 to-transparent opacity-50 z-[-1]"></div>
+        
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <div className="mb-8 profile-image-container inline-block">
             <img 
@@ -146,6 +150,8 @@ const Index = () => {
         <CyberCube />
       </section>
       
+      <div className="absolute inset-0 cyber-grid opacity-5 z-[-1]"></div>
+      
       <section id="about" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-gradient mb-12 text-center">About Me</h2>
@@ -184,7 +190,10 @@ const Index = () => {
         </div>
       </section>
       
-      <section id="projects" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
+      <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark to-cyber-darker z-[-1]"></div>
+      <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
+      
+      <section id="projects" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-gradient mb-4 text-center">Featured Projects</h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Explore some of my recent work and coding experiments</p>
@@ -217,6 +226,8 @@ const Index = () => {
         </div>
       </section>
       
+      <div className="absolute inset-0 bg-gradient-to-b from-cyber-darker to-cyber-dark z-[-1]"></div>
+      
       <section id="skills" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
@@ -227,7 +238,9 @@ const Index = () => {
         </div>
       </section>
       
-      <section id="contact" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
+      <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark to-cyber-darker z-[-1]"></div>
+      
+      <section id="contact" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-gradient mb-4">Connect With Me</h2>
@@ -237,7 +250,10 @@ const Index = () => {
         </div>
       </section>
       
-      <footer className="py-8 px-4 sm:px-6 border-t border-neon-blue/30">
+      <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
+      
+      <footer className="py-8 px-4 sm:px-6 border-t border-neon-blue/30 relative">
+        <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-400 mb-4">
             © {new Date().getFullYear()} Prachit Regmi. All rights reserved.
