@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -95,29 +96,13 @@ export default {
 					'0%, 100%': { 'border-color': 'transparent' },
 					'50%': { 'border-color': 'hsl(var(--primary))' }
 				},
-				glitch: {
-					'0%, 100%': { transform: 'translate(0)' },
-					'50%': { transform: 'translate(-2px, 2px)' }
+				'button-pulse': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.05)' }
 				},
-				float: {
-					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-5px)' }
-				},
-				'matrix-fall': {
-					'0%': { top: '-50%' },
-					'100%': { top: '110%' }
-				},
-				'pulse-neon': {
-					'0%, 100%': { 'box-shadow': '0 0 5px 1px var(--neon-color)' },
-					'50%': { 'box-shadow': '0 0 10px 2px var(--neon-color)' }
-				},
-				'flicker': {
-					'0%, 100%': { opacity: '0.95' },
-					'50%': { opacity: '0.7' }
-				},
-				'pulse-glow': {
-					'0%, 100%': { opacity: '1' },
-					'50%': { opacity: '0.7' }
+				'button-glow': {
+					'0%, 100%': { 'box-shadow': '0 0 5px 0px var(--neon-color)' },
+					'50%': { 'box-shadow': '0 0 8px 2px var(--neon-color)' }
 				}
 			},
 			animation: {
@@ -125,17 +110,9 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'typing': 'typing 2s steps(40, end)',
 				'caret': 'blink 1s step-end infinite',
-				'glitch': 'glitch 0.5s ease infinite',
-				'float': 'float 3s ease-in-out infinite',
-				'matrix-fall': 'matrix-fall 10s linear infinite',
-				'pulse-neon': 'pulse-neon 2s ease-in-out infinite',
-				'flicker': 'flicker 4s linear infinite',
-				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
+				'button-pulse': 'button-pulse 0.5s ease-in-out',
+				'button-glow': 'button-glow 1.5s ease-in-out infinite'
 			},
-			backfaceVisibility: {
-				hidden: 'hidden',
-				visible: 'visible',
-			}
 		}
 	},
 	plugins: [
@@ -148,21 +125,6 @@ export default {
 				'.backface-visible': {
 					'backface-visibility': 'visible',
 				},
-				'.flash': {
-					animation: 'flash 0.5s',
-				},
-				'.glitch-text': {
-					position: 'relative',
-					'&::before': {
-						content: 'attr(data-text)',
-						position: 'absolute',
-						top: '0',
-						left: '2px',
-						width: '100%',
-						height: '100%',
-						textShadow: '-2px 0 #ff00c1'
-					}
-				},
 				'.gpu': {
 					transform: 'translateZ(0)',
 					willChange: 'transform'
@@ -173,8 +135,15 @@ export default {
 				'.contain-content': {
 					contain: 'content'
 				},
-				'.contain-strict': {
-					contain: 'strict'
+				'.contain-layout': {
+					contain: 'layout'
+				},
+				'.button-hover-effect': {
+					'transition': 'all 0.3s ease',
+					'&:hover': {
+						'transform': 'translateY(-2px)',
+						'box-shadow': '0 5px 15px rgba(0, 0, 0, 0.1)'
+					}
 				}
 			}
 			addUtilities(newUtilities)

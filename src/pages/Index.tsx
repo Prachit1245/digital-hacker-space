@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -14,26 +15,9 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Force scroll to top on initial render
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    
-    // Make sure scrolling is enabled
-    document.body.style.overflow = 'auto';
-    document.documentElement.style.overflow = 'auto';
-    
-    // Additional scroll forcing with timeout
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-      
-      // Make sure the welcome section is visible
-      if (welcomeRef.current) {
-        welcomeRef.current.scrollIntoView({ block: 'start' });
-      }
-    }, 100);
+    if (welcomeRef.current) {
+      welcomeRef.current.scrollIntoView({ block: 'start' });
+    }
   }, []);
   
   const scrollToProjects = () => {
@@ -78,7 +62,7 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden relative" id="top">
+    <div className="min-h-screen bg-white text-gray-800 overflow-x-hidden relative" id="top">
       <MatrixBackground />
       
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
@@ -86,14 +70,15 @@ const Index = () => {
       <Navbar />
       
       <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20">
-        <div className="absolute inset-0 bg-gradient-radial from-neon-blue/5 to-transparent opacity-50 z-[-1]"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-neon-blue/5 to-transparent opacity-20 z-[-1]"></div>
         
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <div className="mb-8 profile-image-container inline-block">
             <img 
               src="/lovable-uploads/849fd63f-1814-4e72-a447-0d5359e05bdf.png" 
               alt="Prachit Regmi" 
-              className="profile-image w-32 h-32 object-cover rounded-full border-2 border-neon-blue"
+              className="profile-image w-32 h-32 object-cover rounded-full border-2 border-neon-blue gpu"
+              loading="eager"
             />
           </div>
         
@@ -113,7 +98,7 @@ const Index = () => {
           
           <GlitchHeading text="Prachit Regmi" />
           
-          <p className="text-xl sm:text-2xl text-gray-300 mb-8">
+          <p className="text-xl sm:text-2xl text-gray-700 mb-8">
             <TypewriterText
               text="CSIT Student & Tech Enthusiast"
               speed={80}
@@ -126,7 +111,7 @@ const Index = () => {
               href="https://github.com/Prachit1245" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-colors flex items-center gap-2 group"
+              className="px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-all duration-300 flex items-center gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
             >
               <Github size={20} className="group-hover:animate-spin" />
               GitHub
@@ -134,7 +119,7 @@ const Index = () => {
             
             <a 
               href="#projects" 
-              className="px-6 py-3 rounded-md bg-neon-purple/20 hover:bg-neon-purple/30 border border-neon-purple transition-colors flex items-center gap-2 group"
+              className="px-6 py-3 rounded-md bg-neon-purple/20 hover:bg-neon-purple/30 border border-neon-purple transition-all duration-300 flex items-center gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
               onClick={scrollToProjects}
             >
               <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -154,23 +139,23 @@ const Index = () => {
       
       <section id="about" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gradient mb-12 text-center">About Me</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">About Me</h2>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="glass-panel p-6 rounded-md backdrop-blur-lg relative overflow-hidden group">
+            <div className="p-6 rounded-md relative overflow-hidden group bg-white shadow-md border border-gray-200">
               <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               
               <h3 className="text-xl font-semibold text-neon-blue mb-4 flex items-center gap-2">
                 <Terminal size={18} className="text-neon-green" />
                 Who Am I?
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-700 mb-4">
                 I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Kathmandu, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects.
               </p>
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-700 mb-4">
                 My journey in computer science began when I was fascinated by how technology can transform lives and solve complex problems. Since then, I've been on a mission to expand my knowledge and skills across various domains of computer science.
               </p>
-              <p className="text-gray-300">
+              <p className="text-gray-700">
                 When I'm not coding, you can find me exploring cybersecurity challenges, participating in hackathons, or learning about the latest advancements in AI and machine learning.
               </p>
             </div>
@@ -180,7 +165,7 @@ const Index = () => {
                 <Code size={18} className="text-neon-blue" />
                 Interactive Terminal
               </h3>
-              <p className="text-gray-300 mb-4">Try running some commands to learn more about me:</p>
+              <p className="text-gray-700 mb-4">Try running some commands to learn more about me:</p>
               
               <TerminalWindow 
                 welcomeMessage="Welcome to Prachit's terminal! Type 'help' to see available commands."
@@ -190,13 +175,13 @@ const Index = () => {
         </div>
       </section>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark to-cyber-darker z-[-1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-[-1]"></div>
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
       <section id="projects" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gradient mb-4 text-center">Featured Projects</h2>
-          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Explore some of my recent work and coding experiments</p>
+          <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Featured Projects</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Explore some of my recent work and coding experiments</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {projectData.map((project, index) => (
@@ -217,7 +202,7 @@ const Index = () => {
               href="https://github.com/prachitregmi" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-colors gap-2 group"
+              className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-all duration-300 gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
             >
               View All Projects on GitHub
               <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -226,25 +211,25 @@ const Index = () => {
         </div>
       </section>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-cyber-darker to-cyber-dark z-[-1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white z-[-1]"></div>
       
       <section id="skills" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gradient mb-4">Technical Arsenal</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Tools and technologies I've mastered on my journey</p>
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">Technical Arsenal</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Tools and technologies I've mastered on my journey</p>
           </div>
           <SkillsSection />
         </div>
       </section>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-cyber-dark to-cyber-darker z-[-1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-[-1]"></div>
       
       <section id="contact" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gradient mb-4">Connect With Me</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Let's collaborate on something amazing</p>
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">Connect With Me</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Let's collaborate on something amazing</p>
           </div>
           <ContactSection />
         </div>
@@ -252,10 +237,10 @@ const Index = () => {
       
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
-      <footer className="py-8 px-4 sm:px-6 border-t border-neon-blue/30 relative">
+      <footer className="py-8 px-4 sm:px-6 border-t border-gray-200 relative bg-white">
         <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-600 mb-4">
             © {new Date().getFullYear()} Prachit Regmi. All rights reserved.
           </p>
           <div className="text-sm text-gray-500 flex items-center justify-center gap-2">
