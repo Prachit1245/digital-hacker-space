@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
 import TerminalWindow from '@/components/TerminalWindow';
@@ -9,16 +9,13 @@ import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import CyberCube from '@/components/CyberCube';
 import GlitchHeading from '@/components/GlitchHeading';
-import { ArrowDown, Github, ExternalLink, Terminal, Code, Layers, Cpu } from 'lucide-react';
+import { ArrowDown, Github, ExternalLink, Terminal, Code } from 'lucide-react';
 
 const Index = () => {
-  const [bootSequenceComplete, setBootSequenceComplete] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-  const [bootPercentage, setBootPercentage] = useState(0);
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Force scroll to top on initial render - using multiple methods to ensure it works
+    // Force scroll to top on initial render
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -27,54 +24,7 @@ const Index = () => {
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
     
-    const interval = setInterval(() => {
-      setBootPercentage(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          
-          document.body.classList.add('flash');
-          setTimeout(() => {
-            document.body.classList.remove('flash');
-            setBootSequenceComplete(true);
-            
-            // Ensure we're at the top
-            window.scrollTo(0, 0);
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-            
-            setTimeout(() => {
-              setShowContent(true);
-              // Force scroll to top one more time after content loads
-              window.scrollTo(0, 0);
-              document.body.scrollTop = 0;
-              document.documentElement.scrollTop = 0;
-            }, 100);
-          }, 300);
-          
-          return 100;
-        }
-        
-        const increment = Math.floor(Math.random() * 5) + 
-                          Math.max(1, Math.floor((100 - prev) / 20));
-        return Math.min(100, prev + increment);
-      });
-    }, 120);
-    
-    const playBootSound = () => {
-      try {
-        const audio = new Audio('/boot-sound.mp3');
-        audio.volume = 0.3;
-        audio.play().catch(() => {
-          console.log('Audio play failed (this is expected if user hasn\'t interacted)');
-        });
-      } catch (e) {
-        console.log('Audio error (can be ignored):', e);
-      }
-    };
-    
-    playBootSound();
-    
-    // Additional scroll forcing with timeout to ensure it works after all rendering
+    // Additional scroll forcing with timeout
     setTimeout(() => {
       window.scrollTo(0, 0);
       document.body.scrollTop = 0;
@@ -84,26 +34,8 @@ const Index = () => {
       if (welcomeRef.current) {
         welcomeRef.current.scrollIntoView({ block: 'start' });
       }
-    }, 300);
-    
-    return () => clearInterval(interval);
+    }, 100);
   }, []);
-  
-  // Add an extra useEffect to ensure scroll position after component is fully mounted
-  useEffect(() => {
-    if (showContent) {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-      
-      // Set the scroll position to top with a slight delay to ensure it works
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'auto' });
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-      }, 200);
-    }
-  }, [showContent]);
   
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
@@ -148,215 +80,174 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-cyber-darker text-white overflow-x-hidden" id="top">
-      {!bootSequenceComplete ? (
-        <div className="min-h-screen flex flex-col items-center justify-center p-4 font-cyber relative">
-          <MatrixBackground />
-          <div className="w-full max-w-md z-10">
-            <div className="mb-6 text-neon-green">
-              <p className="glitch-text">$ initiating_system_boot</p>
-              <p>$ loading_core_modules</p>
-              <p>$ verifying_integrity</p>
-              <p>$ establishing_connection</p>
-              <p className="animate-pulse">$ booting_security_protocols</p>
-            </div>
+      <MatrixBackground />
+      <Navbar />
+      
+      <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20">
+        <div className="relative z-10 text-center max-w-3xl mx-auto">
+          <div className="mb-8 profile-image-container inline-block">
+            <img 
+              src="/lovable-uploads/849fd63f-1814-4e72-a447-0d5359e05bdf.png" 
+              alt="Prachit Regmi" 
+              className="profile-image w-32 h-32 object-cover rounded-full border-2 border-neon-blue"
+            />
+          </div>
+        
+          <div className="terminal-window mb-6 text-left">
+            <TypewriterText
+              text={[
+                "Initializing Prachit Regmi's Digital Space...",
+                "Loading skills... ✅",
+                "Activating portfolio... ✅",
+                "Welcome to my world! 🚀"
+              ]}
+              speed={50}
+              startDelay={300}
+              className="text-neon-green"
+            />
+          </div>
+          
+          <GlitchHeading text="Prachit Regmi" />
+          
+          <p className="text-xl sm:text-2xl text-gray-300 mb-8">
+            <TypewriterText
+              text="CSIT Student & Tech Enthusiast"
+              speed={80}
+              startDelay={1500}
+            />
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <a 
+              href="https://github.com/Prachit1245" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-colors flex items-center gap-2 group"
+            >
+              <Github size={20} className="group-hover:animate-spin" />
+              GitHub
+            </a>
             
-            <div className="w-full h-2 bg-cyber-light rounded-full overflow-hidden mb-4">
-              <div 
-                className="h-full bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink transition-all duration-300"
-                style={{ width: `${bootPercentage}%` }}
-              />
-            </div>
-            
-            <div className="flex justify-between text-sm">
-              <span className="text-neon-blue">PR_OS v3.5</span>
-              <span className="text-neon-pink">{bootPercentage}%</span>
-            </div>
-            
-            {bootPercentage > 60 && (
-              <div className="mt-8 text-xs text-neon-green opacity-80">
-                <p>Initializing matrix protocols...</p>
-                <p>Establishing neural network connections...</p>
-                <p>Configuring digital interface...</p>
-              </div>
-            )}
+            <a 
+              href="#projects" 
+              className="px-6 py-3 rounded-md bg-neon-purple/20 hover:bg-neon-purple/30 border border-neon-purple transition-colors flex items-center gap-2 group"
+              onClick={scrollToProjects}
+            >
+              <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
+              Projects
+            </a>
+          </div>
+          
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <ArrowDown className="text-neon-blue" size={32} />
           </div>
         </div>
-      ) : (
-        <>
-          <MatrixBackground />
-          <Navbar />
+        
+        <CyberCube />
+      </section>
+      
+      <section id="about" className="py-20 px-4 sm:px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gradient mb-12 text-center">About Me</h2>
           
-          {showContent && (
-            <>
-              <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20">
-                <div className="relative z-10 text-center max-w-3xl mx-auto">
-                  <div className="mb-8 profile-image-container inline-block">
-                    <img 
-                      src="/lovable-uploads/849fd63f-1814-4e72-a447-0d5359e05bdf.png" 
-                      alt="Prachit Regmi" 
-                      className="profile-image w-32 h-32 object-cover rounded-full border-2 border-neon-blue"
-                    />
-                  </div>
-                
-                  <div className="terminal-window mb-6 text-left">
-                    <TypewriterText
-                      text={[
-                        "Initializing Prachit Regmi's Digital Space...",
-                        "Loading skills... ✅",
-                        "Activating portfolio... ✅",
-                        "Welcome to my world! 🚀"
-                      ]}
-                      speed={50}
-                      startDelay={300}
-                      className="text-neon-green"
-                    />
-                  </div>
-                  
-                  <GlitchHeading text="Prachit Regmi" />
-                  
-                  <p className="text-xl sm:text-2xl text-gray-300 mb-8">
-                    <TypewriterText
-                      text="CSIT Student & Tech Enthusiast"
-                      speed={80}
-                      startDelay={2500}
-                    />
-                  </p>
-                  
-                  <div className="flex flex-wrap justify-center gap-4 mb-12">
-                    <a 
-                      href="https://github.com/Prachit1245" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-colors flex items-center gap-2 group"
-                    >
-                      <Github size={20} className="group-hover:animate-spin" />
-                      GitHub
-                    </a>
-                    
-                    <a 
-                      href="#projects" 
-                      className="px-6 py-3 rounded-md bg-neon-purple/20 hover:bg-neon-purple/30 border border-neon-purple transition-colors flex items-center gap-2 group"
-                      onClick={scrollToProjects}
-                    >
-                      <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
-                      Projects
-                    </a>
-                  </div>
-                  
-                  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                    <ArrowDown className="text-neon-blue" size={32} />
-                  </div>
-                </div>
-                
-                <CyberCube />
-              </section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="glass-panel p-6 rounded-md backdrop-blur-lg relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               
-              <section id="about" className="py-20 px-4 sm:px-6 relative">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-3xl font-bold text-gradient mb-12 text-center">About Me</h2>
-                  
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <div className="glass-panel p-6 rounded-md backdrop-blur-lg relative overflow-hidden group">
-                      <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                      
-                      <h3 className="text-xl font-semibold text-neon-blue mb-4 flex items-center gap-2">
-                        <Terminal size={18} className="text-neon-green" />
-                        Who Am I?
-                      </h3>
-                      <p className="text-gray-300 mb-4">
-                        I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Kathmandu, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects.
-                      </p>
-                      <p className="text-gray-300 mb-4">
-                        My journey in computer science began when I was fascinated by how technology can transform lives and solve complex problems. Since then, I've been on a mission to expand my knowledge and skills across various domains of computer science.
-                      </p>
-                      <p className="text-gray-300">
-                        When I'm not coding, you can find me exploring cybersecurity challenges, participating in hackathons, or learning about the latest advancements in AI and machine learning.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold text-neon-green mb-4 flex items-center gap-2">
-                        <Code size={18} className="text-neon-blue" />
-                        Interactive Terminal
-                      </h3>
-                      <p className="text-gray-300 mb-4">Try running some commands to learn more about me:</p>
-                      
-                      <TerminalWindow 
-                        welcomeMessage="Welcome to Prachit's terminal! Type 'help' to see available commands."
-                      />
-                    </div>
-                  </div>
-                </div>
-              </section>
+              <h3 className="text-xl font-semibold text-neon-blue mb-4 flex items-center gap-2">
+                <Terminal size={18} className="text-neon-green" />
+                Who Am I?
+              </h3>
+              <p className="text-gray-300 mb-4">
+                I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Kathmandu, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects.
+              </p>
+              <p className="text-gray-300 mb-4">
+                My journey in computer science began when I was fascinated by how technology can transform lives and solve complex problems. Since then, I've been on a mission to expand my knowledge and skills across various domains of computer science.
+              </p>
+              <p className="text-gray-300">
+                When I'm not coding, you can find me exploring cybersecurity challenges, participating in hackathons, or learning about the latest advancements in AI and machine learning.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-semibold text-neon-green mb-4 flex items-center gap-2">
+                <Code size={18} className="text-neon-blue" />
+                Interactive Terminal
+              </h3>
+              <p className="text-gray-300 mb-4">Try running some commands to learn more about me:</p>
               
-              <section id="projects" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-3xl font-bold text-gradient mb-4 text-center">Featured Projects</h2>
-                  <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Explore some of my recent work and coding experiments</p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    {projectData.map((project, index) => (
-                      <ProjectCard
-                        key={index}
-                        title={project.title}
-                        description={project.description}
-                        tags={project.tags}
-                        image={project.image}
-                        github={project.github}
-                        link={project.link}
-                      />
-                    ))}
-                  </div>
-                  
-                  <div className="mt-12 text-center">
-                    <a 
-                      href="https://github.com/prachitregmi" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-colors gap-2 group"
-                    >
-                      View All Projects on GitHub
-                      <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-              </section>
-              
-              <section id="skills" className="py-20 px-4 sm:px-6 relative">
-                <div className="max-w-6xl mx-auto">
-                  <div className="mb-12 text-center">
-                    <h2 className="text-3xl font-bold text-gradient mb-4">Technical Arsenal</h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">Tools and technologies I've mastered on my journey</p>
-                  </div>
-                  <SkillsSection />
-                </div>
-              </section>
-              
-              <section id="contact" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
-                <div className="max-w-6xl mx-auto">
-                  <div className="mb-12 text-center">
-                    <h2 className="text-3xl font-bold text-gradient mb-4">Connect With Me</h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto">Let's collaborate on something amazing</p>
-                  </div>
-                  <ContactSection />
-                </div>
-              </section>
-              
-              <footer className="py-8 px-4 sm:px-6 border-t border-neon-blue/30">
-                <div className="max-w-6xl mx-auto text-center">
-                  <p className="text-gray-400 mb-4">
-                    © {new Date().getFullYear()} Prachit Regmi. All rights reserved.
-                  </p>
-                  <div className="text-sm text-gray-500 flex items-center justify-center gap-2">
-                    <span className="inline-block h-2 w-2 rounded-full bg-neon-green animate-pulse"></span>
-                    <span>Status: Online & Ready for Opportunities</span>
-                  </div>
-                </div>
-              </footer>
-            </>
-          )}
-        </>
-      )}
+              <TerminalWindow 
+                welcomeMessage="Welcome to Prachit's terminal! Type 'help' to see available commands."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="projects" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-gradient mb-4 text-center">Featured Projects</h2>
+          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Explore some of my recent work and coding experiments</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {projectData.map((project, index) => (
+              <ProjectCard
+                key={index}
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                image={project.image}
+                github={project.github}
+                link={project.link}
+              />
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <a 
+              href="https://github.com/prachitregmi" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-colors gap-2 group"
+            >
+              View All Projects on GitHub
+              <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <section id="skills" className="py-20 px-4 sm:px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold text-gradient mb-4">Technical Arsenal</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">Tools and technologies I've mastered on my journey</p>
+          </div>
+          <SkillsSection />
+        </div>
+      </section>
+      
+      <section id="contact" className="py-20 px-4 sm:px-6 relative bg-cyber-dark">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold text-gradient mb-4">Connect With Me</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">Let's collaborate on something amazing</p>
+          </div>
+          <ContactSection />
+        </div>
+      </section>
+      
+      <footer className="py-8 px-4 sm:px-6 border-t border-neon-blue/30">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gray-400 mb-4">
+            © {new Date().getFullYear()} Prachit Regmi. All rights reserved.
+          </p>
+          <div className="text-sm text-gray-500 flex items-center justify-center gap-2">
+            <span className="inline-block h-2 w-2 rounded-full bg-neon-green animate-pulse"></span>
+            <span>Status: Online & Ready for Opportunities</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
