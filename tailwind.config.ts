@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -98,42 +97,27 @@ export default {
 				},
 				glitch: {
 					'0%, 100%': { transform: 'translate(0)' },
-					'20%': { transform: 'translate(-5px, 5px)' },
-					'40%': { transform: 'translate(-5px, -5px)' },
-					'60%': { transform: 'translate(5px, 5px)' },
-					'80%': { transform: 'translate(5px, -5px)' }
+					'50%': { transform: 'translate(-2px, 2px)' }
 				},
 				float: {
 					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-10px)' }
+					'50%': { transform: 'translateY(-5px)' }
 				},
 				'matrix-fall': {
 					'0%': { top: '-50%' },
 					'100%': { top: '110%' }
 				},
 				'pulse-neon': {
-					'0%, 100%': { 'box-shadow': '0 0 10px 2px var(--neon-color)' },
-					'50%': { 'box-shadow': '0 0 20px 5px var(--neon-color)' }
+					'0%, 100%': { 'box-shadow': '0 0 5px 1px var(--neon-color)' },
+					'50%': { 'box-shadow': '0 0 10px 2px var(--neon-color)' }
 				},
 				'flicker': {
-					'0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%': { 
-						opacity: '0.95',
-						filter: 'brightness(1)'
-					},
-					'20%, 24%, 55%': { 
-						opacity: '0.2',
-						filter: 'brightness(1.5)' 
-					}
+					'0%, 100%': { opacity: '0.95' },
+					'50%': { opacity: '0.7' }
 				},
 				'pulse-glow': {
-					'0%, 100%': { 
-						opacity: '1',
-						textShadow: '0 0 10px var(--neon-color), 0 0 20px var(--neon-color)'
-					},
-					'50%': { 
-						opacity: '0.7',
-						textShadow: '0 0 5px var(--neon-color), 0 0 10px var(--neon-color)'
-					}
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' }
 				}
 			},
 			animation: {
@@ -148,7 +132,6 @@ export default {
 				'flicker': 'flicker 4s linear infinite',
 				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
 			},
-			// Add backface-visibility utility
 			backfaceVisibility: {
 				hidden: 'hidden',
 				visible: 'visible',
@@ -170,24 +153,28 @@ export default {
 				},
 				'.glitch-text': {
 					position: 'relative',
-					'&::before, &::after': {
+					'&::before': {
 						content: 'attr(data-text)',
 						position: 'absolute',
 						top: '0',
-						left: '0',
-						width: '100%',
-						height: '100%'
-					},
-					'&::before': {
 						left: '2px',
-						textShadow: '-2px 0 #ff00c1',
-						animation: 'glitch-anim-1 2s infinite linear alternate-reverse'
-					},
-					'&::after': {
-						left: '-2px',
-						textShadow: '2px 0 #00fff9',
-						animation: 'glitch-anim-2 3s infinite linear alternate-reverse'
+						width: '100%',
+						height: '100%',
+						textShadow: '-2px 0 #ff00c1'
 					}
+				},
+				'.gpu': {
+					transform: 'translateZ(0)',
+					willChange: 'transform'
+				},
+				'.contain-paint': {
+					contain: 'paint'
+				},
+				'.contain-content': {
+					contain: 'content'
+				},
+				'.contain-strict': {
+					contain: 'strict'
 				}
 			}
 			addUtilities(newUtilities)

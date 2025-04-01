@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Skill {
@@ -65,44 +65,40 @@ const skills: Skill[] = [
 ];
 
 const SkillsSection = ({ className }: SkillsSectionProps) => {
-  const progressRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visibleSkills, setVisibleSkills] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const target = entry.target as HTMLDivElement;
-            const index = parseInt(target.dataset.index || '0');
-            const level = skills[index].level;
-            
-            target.style.width = `0%`;
-            
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          // Stagger the animations for better performance
+          skills.forEach((_, index) => {
             setTimeout(() => {
-              target.style.transition = 'width 1.5s ease-in-out';
-              target.style.width = `${level}%`;
-            }, 100);
-            
-            observer.unobserve(target);
-          }
-        });
+              setVisibleSkills(prev => [...prev, index]);
+            }, index * 100);
+          });
+          
+          observer.unobserve(entry.target);
+        }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
     
-    progressRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
     
     return () => {
-      progressRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
     };
   }, []);
   
   return (
-    <div className={cn("space-y-8 relative", className)}>
+    <div ref={sectionRef} className={cn("space-y-8 relative", className)}>
       {/* Background tech grid pattern */}
       <div className="absolute inset-0 cyber-grid opacity-10 -z-10"></div>
       
@@ -112,23 +108,29 @@ const SkillsSection = ({ className }: SkillsSectionProps) => {
         {skills.map((skill, index) => (
           <div key={index} className="space-y-2 glass-panel p-4 relative overflow-hidden group">
             {/* Background skill icon */}
-            <div className="absolute right-0 bottom-0 opacity-10 w-24 h-24 transition-all duration-300 group-hover:opacity-20 group-hover:scale-110">
-              <img src={skill.icon} alt={skill.name} className="w-full h-full object-contain" />
+            <div className="absolute right-0 bottom-0 opacity-10 w-24 h-24 transition-opacity duration-300 group-hover:opacity-20">
+              <img 
+                src={skill.icon} 
+                alt={skill.name} 
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
             
             <div className="flex justify-between">
               <span className="text-lg flex items-center gap-2">
-                <img src={skill.icon} alt="" className="w-5 h-5" />
+                <img src={skill.icon} alt="" className="w-5 h-5" loading="lazy" />
                 {skill.name}
               </span>
-              <span className="text-neon-blue glow-text">{skill.level}%</span>
+              <span className="text-neon-blue">{skill.level}%</span>
             </div>
             <div className="h-2 bg-cyber-light rounded-full overflow-hidden">
               <div 
-                ref={el => progressRefs.current[index] = el}
-                data-index={index}
-                className={cn("h-full", skill.color)}
-                style={{ width: '0%' }}
+                className={cn("h-full transition-all duration-1000 ease-out", skill.color)}
+                style={{ 
+                  width: visibleSkills.includes(index) ? `${skill.level}%` : '0%',
+                  transform: 'translateZ(0)' // Force GPU acceleration
+                }}
               />
             </div>
           </div>
@@ -137,25 +139,40 @@ const SkillsSection = ({ className }: SkillsSectionProps) => {
       
       <div className="glass-panel p-6 mt-12 relative overflow-hidden">
         <div className="absolute inset-0 z-[-1] opacity-20 bg-cyber-grid"></div>
-        <h3 className="text-xl font-semibold text-neon-green mb-4 glow-text">Currently Learning</h3>
+        <h3 className="text-xl font-semibold text-neon-green mb-4">Currently Learning</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="glass-panel p-3 flex items-center gap-3 relative overflow-hidden group">
-            <div className="absolute right-0 bottom-0 opacity-5 w-16 h-16 transition-all duration-300 group-hover:opacity-10 group-hover:scale-110">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitcoin/bitcoin-original.svg" alt="Blockchain" className="w-full h-full object-contain" />
+            <div className="absolute right-0 bottom-0 opacity-5 w-16 h-16 transition-opacity duration-300 group-hover:opacity-10">
+              <img 
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitcoin/bitcoin-original.svg" 
+                alt="Blockchain" 
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
             <div className="w-3 h-3 rounded-full bg-neon-blue animate-pulse"></div>
             <span>Blockchain Development</span>
           </div>
           <div className="glass-panel p-3 flex items-center gap-3 relative overflow-hidden group">
-            <div className="absolute right-0 bottom-0 opacity-5 w-16 h-16 transition-all duration-300 group-hover:opacity-10 group-hover:scale-110">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="Cloud" className="w-full h-full object-contain" />
+            <div className="absolute right-0 bottom-0 opacity-5 w-16 h-16 transition-opacity duration-300 group-hover:opacity-10">
+              <img 
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" 
+                alt="Cloud" 
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
             <div className="w-3 h-3 rounded-full bg-neon-purple animate-pulse"></div>
             <span>Cloud Architecture</span>
           </div>
           <div className="glass-panel p-3 flex items-center gap-3 relative overflow-hidden group">
-            <div className="absolute right-0 bottom-0 opacity-5 w-16 h-16 transition-all duration-300 group-hover:opacity-10 group-hover:scale-110">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="AI/ML" className="w-full h-full object-contain" />
+            <div className="absolute right-0 bottom-0 opacity-5 w-16 h-16 transition-opacity duration-300 group-hover:opacity-10">
+              <img 
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" 
+                alt="AI/ML" 
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
             <div className="w-3 h-3 rounded-full bg-neon-pink animate-pulse"></div>
             <span>AI/ML Engineering</span>

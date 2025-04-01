@@ -52,6 +52,7 @@
       radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
       linear-gradient(rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
     background-attachment: fixed;
+    will-change: auto;
   }
 
   html {
@@ -61,6 +62,7 @@
   section {
     position: relative;
     overflow: hidden;
+    contain: content;
   }
   
   section::before {
@@ -120,7 +122,7 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+    text-shadow: 0 0 5px var(--neon-color);
   }
 
   .matrix-text-container {
@@ -131,35 +133,25 @@
                       rgba(16, 18, 27, 0.4) 50%, 
                       rgba(16, 18, 27, 0.1) 100%);
     z-index: -1;
+    contain: strict;
   }
   
   .matrix-text {
     @apply font-cyber text-sm absolute whitespace-nowrap;
     color: theme('colors.neon.green');
-    text-shadow: 0 0 8px theme('colors.neon.green');
+    text-shadow: 0 0 5px theme('colors.neon.green');
     animation: matrix-fall linear forwards;
-    opacity: 0.95;
+    opacity: 0.8;
     letter-spacing: 0.1em;
     line-height: 1.2;
+    will-change: transform;
+    contain: content;
   }
   
   .matrix-text .highlight {
     color: #ffffff;
-    text-shadow: 0 0 20px theme('colors.neon.green'), 0 0 30px theme('colors.neon.green');
+    text-shadow: 0 0 10px theme('colors.neon.green');
     opacity: 1;
-    animation: pulse-character 1.5s infinite alternate;
-  }
-  
-  .matrix-text .highlight-medium {
-    color: #d0ffe5;
-    text-shadow: 0 0 15px theme('colors.neon.green');
-    opacity: 0.98;
-  }
-  
-  .matrix-text .highlight-subtle {
-    color: #80e89e;
-    text-shadow: 0 0 12px theme('colors.neon.green');
-    opacity: 0.96;
   }
   
   .special-stream {
@@ -169,9 +161,8 @@
   
   .special-highlight {
     color: theme('colors.neon.blue');
-    text-shadow: 0 0 20px theme('colors.neon.blue'), 0 0 35px theme('colors.neon.blue');
+    text-shadow: 0 0 10px theme('colors.neon.blue');
     opacity: 1;
-    animation: special-pulse 2s infinite alternate;
   }
 
   .terminal-window {
@@ -184,9 +175,13 @@
   }
 
   .cyber-card {
-    @apply glass-panel rounded-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(14,165,233,0.5)];
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    @apply glass-panel rounded-md overflow-hidden transition-transform duration-300;
+    transform: translateZ(0);
+  }
+
+  .cyber-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(14,165,233,0.3);
   }
 
   .cyber-card-inner {
@@ -221,11 +216,11 @@
 
   .profile-image {
     @apply transition-all duration-300;
+    transform: translateZ(0);
   }
 
   .profile-image-container:hover .profile-image {
-    @apply animate-glitch;
-    filter: hue-rotate(90deg) brightness(1.1) contrast(1.5);
+    filter: hue-rotate(90deg) brightness(1.1);
   }
   
   .neon-glow {
@@ -289,46 +284,27 @@
     transform: translateY(-100%);
     opacity: 0.7;
   }
-  5% { opacity: 0.95; }
-  20% { opacity: 0.98; }
-  50% { opacity: 0.95; }
-  80% { opacity: 0.9; }
   100% { 
     transform: translateY(1000px);
-    opacity: 0.2; 
+    opacity: 0.1; 
   }
 }
 
 @keyframes pulse-character {
-  0% {
+  0%, 100% {
     opacity: 1;
-    transform: scale(1);
-    text-shadow: 0 0 15px theme('colors.neon.green'), 0 0 20px theme('colors.neon.green');
   }
   50% {
-    opacity: 1;
-    transform: scale(1.8);
-    text-shadow: 0 0 25px theme('colors.neon.green'), 0 0 40px theme('colors.neon.green');
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    text-shadow: 0 0 15px theme('colors.neon.green'), 0 0 20px theme('colors.neon.green');
+    opacity: 0.7;
   }
 }
 
 @keyframes special-pulse {
-  0% {
+  0%, 100% {
     opacity: 0.95;
-    text-shadow: 0 0 15px theme('colors.neon.blue'), 0 0 20px theme('colors.neon.blue');
   }
   50% {
-    opacity: 1;
-    text-shadow: 0 0 35px theme('colors.neon.blue'), 0 0 45px theme('colors.neon.blue');
-  }
-  100% {
-    opacity: 0.95;
-    text-shadow: 0 0 15px theme('colors.neon.blue'), 0 0 20px theme('colors.neon.blue');
+    opacity: 0.6;
   }
 }
 
