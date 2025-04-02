@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -18,10 +17,24 @@ const Index = () => {
     // Ensure page starts at the top
     window.scrollTo(0, 0);
     
-    // Additional scroll reference if needed
-    if (welcomeRef.current) {
+    // Handle hash navigation if present
+    const { hash } = window.location;
+    if (hash && document.querySelector(hash)) {
+      setTimeout(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else if (welcomeRef.current) {
+      // Otherwise ensure we start at the top
       welcomeRef.current.scrollIntoView({ block: 'start', behavior: 'auto' });
     }
+
+    // Add event listener to handle browser back/forward navigation
+    const handleNavigation = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('popstate', handleNavigation);
+    return () => window.removeEventListener('popstate', handleNavigation);
   }, []);
   
   const scrollToProjects = () => {
@@ -66,7 +79,7 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-white text-gray-800 overflow-x-hidden relative" id="top">
+    <div className="min-h-screen bg-cyber-dark text-gray-200 overflow-x-hidden relative" id="top">
       <MatrixBackground />
       
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>

@@ -24,11 +24,11 @@ const MatrixBackground = () => {
     const container = containerRef.current;
     container.innerHTML = '';
     
-    // Better matrix effect with optimized performance
-    const maxStreams = 30;
+    // Enhanced matrix effect with more coverage
+    const maxStreams = 50; // Increased number of streams
     const codeChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
     
-    // Create initial streams
+    // Create initial streams - more for fuller coverage
     for (let i = 0; i < maxStreams; i++) {
       createStream(
         container, 
@@ -38,7 +38,7 @@ const MatrixBackground = () => {
       );
     }
     
-    // Continuously create new streams
+    // Continuously create new streams more frequently
     const interval = setInterval(() => {
       if (document.visibilityState === 'visible') {
         createStream(
@@ -48,11 +48,11 @@ const MatrixBackground = () => {
           0
         );
       }
-    }, 500); // Add streams more frequently
+    }, 300); // More frequent stream creation
     
     // Handle window resize for responsive matrix
     const handleResize = () => {
-      // Clear and recreate on resize
+      // Clear and recreate on resize with more streams
       container.innerHTML = '';
       for (let i = 0; i < maxStreams; i++) {
         createStream(
@@ -82,11 +82,11 @@ const MatrixBackground = () => {
     stream.className = 'matrix-text';
     stream.style.left = `${xPosition}px`;
     stream.style.animationDelay = `${delay}ms`;
-    stream.style.animationDuration = `${7 + Math.random() * 10}s`; // Random speed between 7-17s
-    stream.style.opacity = `${0.4 + Math.random() * 0.6}`; // Better random opacity
+    stream.style.animationDuration = `${5 + Math.random() * 10}s`; // Faster animation (5-15s)
+    stream.style.opacity = `${0.6 + Math.random() * 0.4}`; // Higher opacity
     
     // Variable length streams for more natural look
-    const length = 5 + Math.floor(Math.random() * 15); // Between 5-20 characters
+    const length = 5 + Math.floor(Math.random() * 20); // Between 5-25 characters
     let streamText = '';
     for (let j = 0; j < length; j++) {
       streamText += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -108,11 +108,18 @@ const MatrixBackground = () => {
   return (
     <div 
       ref={containerRef} 
-      className="matrix-text-container fixed inset-0 w-full h-full overflow-hidden -z-10"
+      className="matrix-text-container fixed inset-0 w-full h-full overflow-hidden z-[-10]"
       style={{ 
-        zIndex: -1, 
-        opacity: 0.7,
-        background: 'rgba(0, 0, 0, 0.95)'
+        background: 'rgba(0, 0, 0, 0.9)', // Darker background
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -1,
+        pointerEvents: 'none'
       }}
       aria-hidden="true"
     />

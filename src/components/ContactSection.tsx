@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Send, Github, Linkedin, Mail, Twitter, Phone } from 'lucide-react';
 import TypewriterText from './TypewriterText';
+import { toast } from '@/components/ui/use-toast';
 
 interface ContactSectionProps {
   className?: string;
@@ -15,23 +15,62 @@ const ContactSection = ({ className }: ContactSectionProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Using EmailJS to send email without backend
+      const serviceId = 'default_service'; // Replace with your service ID
+      const templateId = 'template_default'; // Replace with your template ID
+      const userId = 'user_yourUserID'; // Replace with your user ID
+      
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        to_name: 'Prachit',
+        to_email: 'prachitregmi456@gmail.com',
+        message: message,
+      };
+      
+      // Using formsubmit.co as an alternative free email service
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('message', message);
+      
+      await fetch('https://formsubmit.co/prachitregmi456@gmail.com', {
+        method: 'POST',
+        body: formData,
+      });
+      
       setIsSubmitting(false);
       setIsSuccess(true);
       setName('');
       setEmail('');
       setMessage('');
       
+      // Show success toast
+      toast({
+        title: "Message Sent!",
+        description: "Your message has been sent to Prachit. Thanks for reaching out!",
+      });
+      
       // Reset success message after a delay
       setTimeout(() => {
         setIsSuccess(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setIsSubmitting(false);
+      
+      // Show error toast
+      toast({
+        title: "Error",
+        description: "There was an issue sending your message. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   
   return (
@@ -109,7 +148,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
               
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium rounded-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                className="w-full py-2 px-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium rounded-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2 hover:transform hover:translate-y-[-5px] hover:shadow-lg hover:shadow-neon-blue/30"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -126,6 +165,10 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                   </>
                 )}
               </button>
+              
+              <div className="text-xs text-gray-400 text-center mt-2">
+                Your message will be sent directly to prachitregmi456@gmail.com
+              </div>
             </form>
           )}
         </div>
