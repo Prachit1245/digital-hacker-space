@@ -128,12 +128,12 @@
   
   .matrix-text {
     @apply font-mono text-sm absolute whitespace-nowrap;
-    color: #0f0;
+    text-shadow: 0 0 5px currentColor;
     animation: matrix-fall linear forwards;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
     will-change: transform, opacity;
     contain: layout paint style;
     line-height: 1;
+    font-weight: 500;
   }
   
   .terminal-window {

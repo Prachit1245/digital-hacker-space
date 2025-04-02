@@ -79,7 +79,7 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-cyber-dark text-gray-200 overflow-x-hidden relative" id="top">
+    <div className="min-h-screen text-gray-200 overflow-x-hidden relative" id="top">
       <MatrixBackground />
       
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
