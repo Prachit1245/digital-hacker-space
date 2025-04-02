@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -8,6 +9,7 @@ import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import CyberCube from '@/components/CyberCube';
 import GlitchHeading from '@/components/GlitchHeading';
+import CustomCursor from '@/components/CustomCursor';
 import { ArrowDown, Github, ExternalLink, Terminal, Code } from 'lucide-react';
 
 const Index = () => {
@@ -34,7 +36,26 @@ const Index = () => {
     };
 
     window.addEventListener('popstate', handleNavigation);
-    return () => window.removeEventListener('popstate', handleNavigation);
+    
+    // Add animation to sections when they become visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.add('opacity-0');
+      observer.observe(section);
+    });
+    
+    return () => {
+      window.removeEventListener('popstate', handleNavigation);
+      observer.disconnect();
+    };
   }, []);
   
   const scrollToProjects = () => {
@@ -81,16 +102,17 @@ const Index = () => {
   return (
     <div className="min-h-screen text-gray-200 overflow-x-hidden relative" id="top">
       <MatrixBackground />
+      <CustomCursor />
       
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
       <Navbar />
       
-      <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20">
+      <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20 animate-fade-in">
         <div className="absolute inset-0 bg-gradient-radial from-neon-blue/5 to-transparent opacity-20 z-[-1]"></div>
         
         <div className="relative z-10 text-center max-w-3xl mx-auto">
-          <div className="mb-8 profile-image-container inline-block">
+          <div className="mb-8 profile-image-container inline-block animate-pulse hover:animate-none">
             <img 
               src="/lovable-uploads/849fd63f-1814-4e72-a447-0d5359e05bdf.png" 
               alt="Prachit Regmi" 
@@ -128,7 +150,7 @@ const Index = () => {
               href="https://github.com/Prachit1245" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-all duration-300 flex items-center gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
+              className="px-6 py-3 rounded-md bg-neon-blue hover:bg-neon-blue/90 border border-neon-blue text-white transition-all duration-300 flex items-center gap-2 group hover:translate-y-[-3px] hover:shadow-[0_0_20px_rgba(14,165,233,0.6)] animate-pulse hover:animate-none"
             >
               <Github size={20} className="group-hover:animate-spin" />
               GitHub
@@ -136,7 +158,7 @@ const Index = () => {
             
             <a 
               href="#projects" 
-              className="px-6 py-3 rounded-md bg-neon-purple/20 hover:bg-neon-purple/30 border border-neon-purple transition-all duration-300 flex items-center gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
+              className="px-6 py-3 rounded-md bg-neon-purple hover:bg-neon-purple/90 border border-neon-purple text-white transition-all duration-300 flex items-center gap-2 group hover:translate-y-[-3px] hover:shadow-[0_0_20px_rgba(139,92,246,0.6)] animate-pulse hover:animate-none"
               onClick={scrollToProjects}
             >
               <ExternalLink size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -154,16 +176,16 @@ const Index = () => {
       
       <div className="absolute inset-0 cyber-grid opacity-5 z-[-1]"></div>
       
-      <section id="about" className="py-20 px-4 sm:px-6 relative">
+      <section id="about" className="py-20 px-4 sm:px-6 relative opacity-0 transition-all duration-500">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">About Me</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-gradient-blue-to-purple">About Me</h2>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="p-6 rounded-md relative overflow-hidden group bg-white shadow-md border border-gray-200">
+            <div className="p-6 rounded-md relative overflow-hidden group bg-white shadow-md border border-gray-200 hover:shadow-[0_10px_25px_rgba(14,165,233,0.2)] transition-all duration-500 transform hover:-translate-y-2">
               <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               
               <h3 className="text-xl font-semibold text-neon-blue mb-4 flex items-center gap-2">
-                <Terminal size={18} className="text-neon-green" />
+                <Terminal size={18} className="text-neon-green animate-pulse" />
                 Who Am I?
               </h3>
               <p className="text-gray-700 mb-4">
@@ -179,7 +201,7 @@ const Index = () => {
             
             <div>
               <h3 className="text-xl font-semibold text-neon-green mb-4 flex items-center gap-2">
-                <Code size={18} className="text-neon-blue" />
+                <Code size={18} className="text-neon-blue animate-spin-slow" />
                 Interactive Terminal
               </h3>
               <p className="text-gray-700 mb-4">Try running some commands to learn more about me:</p>
@@ -195,9 +217,9 @@ const Index = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-[-1]"></div>
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
-      <section id="projects" className="py-20 px-4 sm:px-6 relative">
+      <section id="projects" className="py-20 px-4 sm:px-6 relative opacity-0 transition-all duration-500">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Featured Projects</h2>
+          <h2 className="text-3xl font-bold mb-4 text-center text-gradient-blue-to-purple">Featured Projects</h2>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Explore some of my recent work and coding experiments</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -219,7 +241,7 @@ const Index = () => {
               href="https://github.com/prachitregmi" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-all duration-300 gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
+              className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue text-white hover:bg-neon-blue/90 border border-neon-blue transition-all duration-300 gap-2 group hover:translate-y-[-3px] hover:shadow-[0_0_20px_rgba(14,165,233,0.6)] animate-pulse hover:animate-none"
             >
               View All Projects on GitHub
               <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -230,10 +252,10 @@ const Index = () => {
       
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white z-[-1]"></div>
       
-      <section id="skills" className="py-20 px-4 sm:px-6 relative">
+      <section id="skills" className="py-20 px-4 sm:px-6 relative opacity-0 transition-all duration-500">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">Technical Arsenal</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gradient-blue-to-purple">Technical Arsenal</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Tools and technologies I've mastered on my journey</p>
           </div>
           <SkillsSection />
@@ -242,10 +264,10 @@ const Index = () => {
       
       <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-[-1]"></div>
       
-      <section id="contact" className="py-20 px-4 sm:px-6 relative">
+      <section id="contact" className="py-20 px-4 sm:px-6 relative opacity-0 transition-all duration-500">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">Connect With Me</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gradient-blue-to-purple">Connect With Me</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Let's collaborate on something amazing</p>
           </div>
           <ContactSection />

@@ -6,24 +6,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow-md hover:shadow-lg relative z-10",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow-md hover:shadow-lg relative z-10 hover:-translate-y-1 hover:scale-105 group",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-primary/20 hover:shadow-primary/30",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-primary/20 hover:shadow-primary/50 overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/0 before:to-primary/30 before:opacity-0 hover:before:animate-shine",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-destructive/20 hover:shadow-destructive/30",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-destructive/20 hover:shadow-destructive/50 overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-destructive/0 before:to-destructive/30 before:opacity-0 hover:before:animate-shine",
         outline:
-          "border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-accent/10 hover:shadow-accent/20",
+          "border-3 border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-accent/10 hover:shadow-accent/30 overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-accent/0 before:to-accent/20 before:opacity-0 hover:before:animate-shine",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-secondary/20 hover:shadow-secondary/30",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline font-semibold",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-secondary/20 hover:shadow-secondary/50 overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-secondary/0 before:to-secondary/30 before:opacity-0 hover:before:animate-shine",
+        ghost: "hover:bg-accent hover:text-accent-foreground shadow-none hover:shadow-accent/10",
+        link: "text-primary underline-offset-4 hover:underline font-semibold shadow-none",
+        glowing: "bg-neon-blue text-white shadow-[0_0_15px_rgba(14,165,233,0.5)] hover:shadow-[0_0_25px_rgba(14,165,233,0.8)] overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-neon-blue/0 before:to-neon-blue/40 before:opacity-0 hover:before:animate-shine",
+        cyber: "bg-neon-purple text-white shadow-[0_0_15px_rgba(139,92,246,0.5)] hover:shadow-[0_0_25px_rgba(139,92,246,0.8)] overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-neon-purple/0 before:to-neon-purple/40 before:opacity-0 hover:before:animate-shine",
       },
       size: {
-        default: "h-10 px-5 py-2.5",
-        sm: "h-9 rounded-md px-4 py-2",
-        lg: "h-12 rounded-md px-8 py-3 text-base",
+        default: "h-11 px-6 py-3",
+        sm: "h-10 rounded-md px-5 py-2.5",
+        lg: "h-12 rounded-md px-8 py-3.5 text-base",
         icon: "h-10 w-10",
       },
     },
