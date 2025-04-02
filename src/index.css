@@ -47,10 +47,12 @@
       linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(250, 250, 252, 1) 100%);
     background-attachment: fixed;
     will-change: auto;
+    scroll-behavior: smooth;
   }
 
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 0;
   }
   
   section {
@@ -127,13 +129,14 @@
   }
   
   .matrix-text {
-    @apply font-mono text-sm absolute whitespace-nowrap;
-    text-shadow: 0 0 5px currentColor;
+    @apply font-mono absolute whitespace-nowrap;
+    text-shadow: 0 0 6px currentColor;
     animation: matrix-fall linear forwards;
     will-change: transform, opacity;
     contain: layout paint style;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 14px;
   }
   
   .terminal-window {
@@ -218,7 +221,7 @@
     opacity: 1;
   }
   95% {
-    opacity: 0.7;
+    opacity: 0.9;
   }
   100% { 
     transform: translateY(100vh);
@@ -259,6 +262,18 @@ img, svg, .matrix-text {
 
 button:hover, a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 91, 150, 0.4);
   transition: all 0.2s ease-out;
+}
+
+a, button, .link, [role="button"] {
+  position: relative;
+  z-index: 10;
+  font-weight: 500;
+}
+
+a:hover, button:hover, .link:hover, [role="button"]:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 80, 150, 0.3);
 }

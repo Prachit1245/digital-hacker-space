@@ -24,31 +24,34 @@ const MatrixBackground = () => {
     const container = containerRef.current;
     container.innerHTML = '';
     
-    // Enhanced matrix effect
-    const maxStreams = 40;
+    // Enhanced matrix effect with more visible characters
+    const maxStreams = 60; // Increased for better coverage
     const codeChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン{}[];:><.,=+-*/";
     
-    // Create initial streams
+    // Create initial streams with more spread
     for (let i = 0; i < maxStreams; i++) {
       createStream(
         container, 
         codeChars, 
         Math.random() * window.innerWidth, 
-        Math.random() * 10000 // Random start time
+        Math.random() * 5000 // Shorter random start time for faster initial appearance
       );
     }
     
-    // Continuously create new streams
+    // Continuously create new streams more frequently
     const interval = setInterval(() => {
       if (document.visibilityState === 'visible') {
-        createStream(
-          container, 
-          codeChars, 
-          Math.random() * window.innerWidth,
-          0
-        );
+        // Create 2 streams at once for more density
+        for (let i = 0; i < 2; i++) {
+          createStream(
+            container, 
+            codeChars, 
+            Math.random() * window.innerWidth,
+            0
+          );
+        }
       }
-    }, 400);
+    }, 300); // More frequent stream creation
     
     // Handle window resize for responsive matrix
     const handleResize = () => {
@@ -59,7 +62,7 @@ const MatrixBackground = () => {
           container, 
           codeChars, 
           Math.random() * window.innerWidth,
-          Math.random() * 5000
+          Math.random() * 2000 // Shorter delay for faster appearance after resize
         );
       }
     };
@@ -76,25 +79,25 @@ const MatrixBackground = () => {
     };
   }, [isReducedMotion]);
   
-  // Stream creation with lighter colors for white background
+  // Stream creation with darker, more visible colors for white background
   const createStream = (container: HTMLDivElement, chars: string, xPosition: number, delay: number) => {
     const stream = document.createElement('div');
     stream.className = 'matrix-text';
     stream.style.left = `${xPosition}px`;
     stream.style.animationDelay = `${delay}ms`;
-    stream.style.animationDuration = `${5 + Math.random() * 15}s`; // Variable speed animation
+    stream.style.animationDuration = `${5 + Math.random() * 10}s`; // Faster animation for better visibility
     
-    // Use different opacities for depth effect
-    const opacity = 0.5 + Math.random() * 0.5;
+    // Use higher opacities for better visibility
+    const opacity = 0.7 + Math.random() * 0.3; // Range from 0.7 to 1.0
     
-    // Colors for white background - using blue/gray tones
+    // Darker blue/teal colors for better visibility on white
     const colorOptions = [
-      'rgba(0, 100, 200, ' + opacity + ')', // Blue
-      'rgba(30, 144, 255, ' + opacity + ')', // Dodger Blue
-      'rgba(0, 128, 128, ' + opacity + ')', // Teal
-      'rgba(70, 130, 180, ' + opacity + ')', // Steel Blue
-      'rgba(25, 25, 112, ' + opacity + ')', // Midnight Blue
-      'rgba(0, 0, 139, ' + opacity + ')'     // Dark Blue
+      'rgba(0, 80, 150, ' + opacity + ')', // Darker Blue
+      'rgba(0, 100, 150, ' + opacity + ')', // Dark Teal
+      'rgba(20, 80, 120, ' + opacity + ')', // Navy Blue
+      'rgba(0, 70, 110, ' + opacity + ')', // Deep Blue
+      'rgba(10, 60, 100, ' + opacity + ')', // Royal Blue
+      'rgba(0, 50, 90, ' + opacity + ')'    // Midnight Blue
     ];
     
     const colorIndex = Math.floor(Math.random() * colorOptions.length);
@@ -108,6 +111,12 @@ const MatrixBackground = () => {
     }
     
     stream.textContent = streamText;
+    
+    // Set font size randomly for varied appearance
+    stream.style.fontSize = `${12 + Math.floor(Math.random() * 6)}px`;
+    
+    // Add a slight text shadow for better visibility
+    stream.style.textShadow = `0 0 6px ${stream.style.color}`;
     
     // Set a timeout to remove stream after animation
     const duration = parseFloat(stream.style.animationDuration) * 1000;
