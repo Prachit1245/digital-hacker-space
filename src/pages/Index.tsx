@@ -15,8 +15,12 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    // Ensure page starts at the top
+    window.scrollTo(0, 0);
+    
+    // Additional scroll reference if needed
     if (welcomeRef.current) {
-      welcomeRef.current.scrollIntoView({ block: 'start' });
+      welcomeRef.current.scrollIntoView({ block: 'start', behavior: 'auto' });
     }
   }, []);
   
