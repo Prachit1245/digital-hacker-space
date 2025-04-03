@@ -25,7 +25,9 @@ const Navbar = ({ className }: NavbarProps) => {
     <nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6",
-        isScrolled ? "bg-white shadow-md" : "bg-white/90 backdrop-blur-sm",
+        isScrolled 
+          ? "bg-white shadow-md" 
+          : "bg-white/90 backdrop-blur-sm shadow-sm",
         className
       )}
     >
@@ -36,19 +38,19 @@ const Navbar = ({ className }: NavbarProps) => {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8">
-          <a href="#welcome" className="text-gray-900 hover:text-neon-blue transition-colors">
+          <a href="#welcome" className="text-gray-900 hover:text-neon-blue font-medium transition-colors">
             Home
           </a>
-          <a href="#about" className="text-gray-900 hover:text-neon-blue transition-colors">
+          <a href="#about" className="text-gray-900 hover:text-neon-blue font-medium transition-colors">
             About
           </a>
-          <a href="#projects" className="text-gray-900 hover:text-neon-blue transition-colors">
+          <a href="#projects" className="text-gray-900 hover:text-neon-blue font-medium transition-colors">
             Projects
           </a>
-          <a href="#skills" className="text-gray-900 hover:text-neon-blue transition-colors">
+          <a href="#skills" className="text-gray-900 hover:text-neon-blue font-medium transition-colors">
             Skills
           </a>
-          <a href="#contact" className="text-gray-900 hover:text-neon-blue transition-colors">
+          <a href="#contact" className="text-gray-900 hover:text-neon-blue font-medium transition-colors">
             Contact
           </a>
         </div>
@@ -67,35 +69,35 @@ const Navbar = ({ className }: NavbarProps) => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white py-4 px-6 flex flex-col space-y-4 border-t border-neon-blue/30 shadow-md">
           <a 
             href="#welcome" 
-            className="text-gray-900 hover:text-neon-blue transition-colors py-2"
+            className="text-gray-900 hover:text-neon-blue font-medium transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Home
           </a>
           <a 
             href="#about" 
-            className="text-gray-900 hover:text-neon-blue transition-colors py-2"
+            className="text-gray-900 hover:text-neon-blue font-medium transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             About
           </a>
           <a 
             href="#projects" 
-            className="text-gray-900 hover:text-neon-blue transition-colors py-2"
+            className="text-gray-900 hover:text-neon-blue font-medium transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Projects
           </a>
           <a 
             href="#skills" 
-            className="text-gray-900 hover:text-neon-blue transition-colors py-2"
+            className="text-gray-900 hover:text-neon-blue font-medium transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Skills
           </a>
           <a 
             href="#contact" 
-            className="text-gray-900 hover:text-neon-blue transition-colors py-2"
+            className="text-gray-900 hover:text-neon-blue font-medium transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact
