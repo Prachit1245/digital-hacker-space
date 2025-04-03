@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import TypewriterText from '@/components/TypewriterText';
 import TerminalWindow from '@/components/TerminalWindow';
@@ -8,6 +7,7 @@ import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import CyberCube from '@/components/CyberCube';
 import GlitchHeading from '@/components/GlitchHeading';
+import SimpleBackground from '@/components/SimpleBackground';
 import { ArrowDown, Github, ExternalLink, Terminal, Code } from 'lucide-react';
 
 const Index = () => {
@@ -99,13 +99,11 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-white text-gray-700 overflow-x-hidden relative" id="top">
-      <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
+      <SimpleBackground />
       
       <Navbar />
       
       <section id="welcome" ref={welcomeRef} className="min-h-screen relative flex flex-col items-center justify-center px-4 sm:px-6 py-20 animate-fade-in">
-        <div className="absolute inset-0 bg-gradient-radial from-neon-blue/5 to-transparent opacity-20 z-[-1]"></div>
-        
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <div className="mb-8 profile-image-container inline-block animate-pulse hover:animate-none">
             <img 
