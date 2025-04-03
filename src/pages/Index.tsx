@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import TypewriterText from '@/components/TypewriterText';
 import TerminalWindow from '@/components/TerminalWindow';
@@ -97,7 +98,7 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen text-gray-200 overflow-x-hidden relative" id="top">
+    <div className="min-h-screen bg-white text-gray-700 overflow-x-hidden relative" id="top">
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
       <Navbar />
