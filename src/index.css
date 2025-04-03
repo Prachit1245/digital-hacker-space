@@ -47,12 +47,10 @@
       linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(250, 250, 252, 1) 100%);
     background-attachment: fixed;
     will-change: auto;
-    scroll-behavior: smooth;
   }
 
   html {
     @apply scroll-smooth;
-    scroll-padding-top: 0;
   }
   
   section {
@@ -129,14 +127,13 @@
   }
   
   .matrix-text {
-    @apply font-mono absolute whitespace-nowrap;
-    text-shadow: 0 0 6px currentColor;
+    @apply font-mono text-sm absolute whitespace-nowrap;
+    color: #0f0;
     animation: matrix-fall linear forwards;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
     will-change: transform, opacity;
     contain: layout paint style;
     line-height: 1;
-    font-weight: 600;
-    font-size: 14px;
   }
   
   .terminal-window {
@@ -221,7 +218,7 @@
     opacity: 1;
   }
   95% {
-    opacity: 0.9;
+    opacity: 0.7;
   }
   100% { 
     transform: translateY(100vh);
@@ -262,140 +259,6 @@ img, svg, .matrix-text {
 
 button:hover, a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 91, 150, 0.4);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
   transition: all 0.2s ease-out;
-}
-
-a, button, .link, [role="button"] {
-  position: relative;
-  z-index: 10;
-  font-weight: 500;
-}
-
-a:hover, button:hover, .link:hover, [role="button"]:hover {
-  filter: brightness(1.2);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 80, 150, 0.3);
-}
-
-/* New animation utilities */
-.text-gradient-blue-to-purple {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple;
-}
-
-.text-gradient-green-to-blue {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-blue;
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.6s ease-in-out forwards;
-}
-
-.animate-slideUp {
-  animation: slideUp 0.6s ease-in-out forwards;
-}
-
-.animate-spin-slow {
-  animation: spin 6s linear infinite;
-}
-
-.hover-zoom {
-  @apply transition-transform duration-300;
-  transform: scale(1);
-}
-
-.hover-zoom:hover {
-  transform: scale(1.05);
-}
-
-.shadow-pulsate {
-  animation: shadowPulsate 2s infinite;
-}
-
-.animate-shine:before {
-  animation: shine 2s forwards;
-}
-
-/* Enhanced button styles */
-.button-glow {
-  @apply relative overflow-hidden text-white py-3 px-6 rounded-md transition-all duration-300 transform hover:-translate-y-1;
-  box-shadow: 0 0 15px theme('colors.neon.blue');
-}
-
-.button-glow:hover {
-  box-shadow: 0 0 25px theme('colors.neon.blue');
-}
-
-.button-glow:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: translateX(-100%);
-}
-
-.button-glow:hover:before {
-  transform: translateX(100%);
-  transition: transform 0.7s ease-in-out;
-}
-
-@keyframes shine {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shadowPulsate {
-  0% {
-    box-shadow: 0 0 5px rgba(14, 165, 233, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(14, 165, 233, 0.4);
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

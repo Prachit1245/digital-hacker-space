@@ -24,34 +24,31 @@ const MatrixBackground = () => {
     const container = containerRef.current;
     container.innerHTML = '';
     
-    // Enhanced matrix effect with more visible characters
-    const maxStreams = 60; // Increased for better coverage
-    const codeChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン{}[];:><.,=+-*/";
+    // Better matrix effect with optimized performance
+    const maxStreams = 30;
+    const codeChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
     
-    // Create initial streams with more spread
+    // Create initial streams
     for (let i = 0; i < maxStreams; i++) {
       createStream(
         container, 
         codeChars, 
         Math.random() * window.innerWidth, 
-        Math.random() * 5000 // Shorter random start time for faster initial appearance
+        Math.random() * 10000 // Random start time
       );
     }
     
-    // Continuously create new streams more frequently
+    // Continuously create new streams
     const interval = setInterval(() => {
       if (document.visibilityState === 'visible') {
-        // Create 2 streams at once for more density
-        for (let i = 0; i < 2; i++) {
-          createStream(
-            container, 
-            codeChars, 
-            Math.random() * window.innerWidth,
-            0
-          );
-        }
+        createStream(
+          container, 
+          codeChars, 
+          Math.random() * window.innerWidth,
+          0
+        );
       }
-    }, 300); // More frequent stream creation
+    }, 500); // Add streams more frequently
     
     // Handle window resize for responsive matrix
     const handleResize = () => {
@@ -62,7 +59,7 @@ const MatrixBackground = () => {
           container, 
           codeChars, 
           Math.random() * window.innerWidth,
-          Math.random() * 2000 // Shorter delay for faster appearance after resize
+          Math.random() * 5000
         );
       }
     };
@@ -79,29 +76,14 @@ const MatrixBackground = () => {
     };
   }, [isReducedMotion]);
   
-  // Stream creation with darker, more visible colors for white background
+  // Improved stream creation with better visuals
   const createStream = (container: HTMLDivElement, chars: string, xPosition: number, delay: number) => {
     const stream = document.createElement('div');
     stream.className = 'matrix-text';
     stream.style.left = `${xPosition}px`;
     stream.style.animationDelay = `${delay}ms`;
-    stream.style.animationDuration = `${5 + Math.random() * 10}s`; // Faster animation for better visibility
-    
-    // Use higher opacities for better visibility
-    const opacity = 0.7 + Math.random() * 0.3; // Range from 0.7 to 1.0
-    
-    // Darker blue/teal colors for better visibility on white
-    const colorOptions = [
-      'rgba(0, 80, 150, ' + opacity + ')', // Darker Blue
-      'rgba(0, 100, 150, ' + opacity + ')', // Dark Teal
-      'rgba(20, 80, 120, ' + opacity + ')', // Navy Blue
-      'rgba(0, 70, 110, ' + opacity + ')', // Deep Blue
-      'rgba(10, 60, 100, ' + opacity + ')', // Royal Blue
-      'rgba(0, 50, 90, ' + opacity + ')'    // Midnight Blue
-    ];
-    
-    const colorIndex = Math.floor(Math.random() * colorOptions.length);
-    stream.style.color = colorOptions[colorIndex];
+    stream.style.animationDuration = `${7 + Math.random() * 10}s`; // Random speed between 7-17s
+    stream.style.opacity = `${0.4 + Math.random() * 0.6}`; // Better random opacity
     
     // Variable length streams for more natural look
     const length = 5 + Math.floor(Math.random() * 15); // Between 5-20 characters
@@ -111,12 +93,6 @@ const MatrixBackground = () => {
     }
     
     stream.textContent = streamText;
-    
-    // Set font size randomly for varied appearance
-    stream.style.fontSize = `${12 + Math.floor(Math.random() * 6)}px`;
-    
-    // Add a slight text shadow for better visibility
-    stream.style.textShadow = `0 0 6px ${stream.style.color}`;
     
     // Set a timeout to remove stream after animation
     const duration = parseFloat(stream.style.animationDuration) * 1000;
@@ -132,19 +108,11 @@ const MatrixBackground = () => {
   return (
     <div 
       ref={containerRef} 
-      className="matrix-text-container"
+      className="matrix-text-container fixed inset-0 w-full h-full overflow-hidden -z-10"
       style={{ 
-        background: '#ffffff', // White background
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: -1,
-        pointerEvents: 'none',
-        overflow: 'hidden'
+        zIndex: -1, 
+        opacity: 0.7,
+        background: 'rgba(0, 0, 0, 0.95)'
       }}
       aria-hidden="true"
     />

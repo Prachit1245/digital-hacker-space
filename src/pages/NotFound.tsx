@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import TypewriterText from "@/components/TypewriterText";
+import MatrixBackground from "@/components/MatrixBackground";
 
 const NotFound = () => {
   const location = useLocation();
@@ -43,8 +44,8 @@ const NotFound = () => {
   }, [location.pathname, konami]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
-      <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
+    <div className="min-h-screen flex items-center justify-center bg-cyber-darker relative overflow-hidden">
+      <MatrixBackground />
       
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-2xl mx-auto">
         {showEasterEgg ? (
@@ -81,7 +82,7 @@ const NotFound = () => {
                 className="text-xl text-neon-orange mb-4 block"
                 speed={40}
               />
-              <p className="text-gray-700 mb-6">
+              <p className="text-gray-300 mb-6">
                 The page you're looking for doesn't exist or has been moved to another dimension.
               </p>
               <Link 
