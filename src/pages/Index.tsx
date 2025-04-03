@@ -1,6 +1,4 @@
-
 import { useEffect, useRef } from 'react';
-import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
 import TerminalWindow from '@/components/TerminalWindow';
 import Navbar from '@/components/Navbar';
@@ -9,7 +7,6 @@ import SkillsSection from '@/components/SkillsSection';
 import ContactSection from '@/components/ContactSection';
 import CyberCube from '@/components/CyberCube';
 import GlitchHeading from '@/components/GlitchHeading';
-import CustomCursor from '@/components/CustomCursor';
 import { ArrowDown, Github, ExternalLink, Terminal, Code } from 'lucide-react';
 
 const Index = () => {
@@ -101,9 +98,6 @@ const Index = () => {
   
   return (
     <div className="min-h-screen text-gray-200 overflow-x-hidden relative" id="top">
-      <MatrixBackground />
-      <CustomCursor />
-      
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
       <Navbar />
