@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Send, Github, Linkedin, Mail, Twitter, Phone } from 'lucide-react';
 import TypewriterText from './TypewriterText';
+import emailjs from 'emailjs-com';
+import { useToast } from "@/hooks/use-toast";
 
 interface ContactSectionProps {
   className?: string;
@@ -14,24 +16,57 @@ const ContactSection = ({ className }: ContactSectionProps) => {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const { toast } = useToast();
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Initialize EmailJS with your service ID
+      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+      
+      // Prepare template parameters
+      const templateParams = {
+        from_name: name,
+        reply_to: email,
+        to_name: "Prachit",
+        message: message,
+        to_email: "prachitregmi456@gmail.com"
+      };
+      
+      // Send the email
+      await emailjs.send(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        templateParams
+      );
+      
+      // If successful, show success message
       setIsSubmitting(false);
       setIsSuccess(true);
       setName('');
       setEmail('');
       setMessage('');
       
+      toast({
+        title: "Message Sent",
+        description: "Your message has been sent successfully!",
+      });
+      
       // Reset success message after a delay
       setTimeout(() => {
         setIsSuccess(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setIsSubmitting(false);
+      toast({
+        title: "Error",
+        description: "Failed to send your message. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   
   return (
