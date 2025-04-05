@@ -153,6 +153,11 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
         }
       ]);
     }
+    
+    // Focus input on component mount
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, [welcomeMessage]);
 
   useEffect(() => {
@@ -188,6 +193,11 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
     setHistory(prev => [...prev, newCommand]);
     setInput('');
     setHistoryIndex(-1);
+    
+    // Re-focus the input after submission
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const focusInput = () => {
@@ -222,7 +232,7 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
   return (
     <div 
       className={cn(
-        "terminal-window relative overflow-hidden",
+        "terminal-window relative overflow-hidden h-[350px]", // Added fixed height
         className
       )}
       onClick={focusInput}
@@ -241,7 +251,7 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
       </div>
       
       {/* Terminal Content */}
-      <div className="pt-8 pb-2 overflow-y-auto max-h-[500px]">
+      <div className="pt-8 pb-2 px-3 overflow-y-auto h-full">
         {history.map((item, index) => (
           <div key={index} className="mb-2">
             {item.input !== 'system' ? (
