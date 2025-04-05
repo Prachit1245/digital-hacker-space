@@ -37,7 +37,7 @@ const ContactSection = ({ className }: ContactSectionProps) => {
       
       // Send the email
       await emailjs.send(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "service_kfd2jj5", // Updated with your EmailJS service ID
         "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
         templateParams
       );
