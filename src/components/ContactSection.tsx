@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Send, Github, Linkedin, Mail, Twitter, Phone } from 'lucide-react';
@@ -23,9 +22,6 @@ const ContactSection = ({ className }: ContactSectionProps) => {
     setIsSubmitting(true);
     
     try {
-      // Initialize EmailJS with your service ID
-      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
-      
       // Prepare template parameters
       const templateParams = {
         from_name: name,
@@ -35,11 +31,12 @@ const ContactSection = ({ className }: ContactSectionProps) => {
         to_email: "prachitregmi456@gmail.com"
       };
       
-      // Send the email
+      // Send the email - using your keys
       await emailjs.send(
-        "service_kfd2jj5", // Updated with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        templateParams
+        "service_kfd2jj5", 
+        "template_ix7cwmd", // Replace this with your actual template ID if different
+        templateParams,
+        "dAleMz5wOFOUtTV7j" // Your EmailJS public key
       );
       
       // If successful, show success message

@@ -10,8 +10,8 @@ import EmailJSConfig from "./components/EmailJSConfig";
 
 const queryClient = new QueryClient();
 
-// Replace this with your actual EmailJS User ID
-const EMAILJS_USER_ID = "YOUR_EMAILJS_USER_ID";
+// EmailJS User ID (Public Key)
+const EMAILJS_USER_ID = "dAleMz5wOFOUtTV7j";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

@@ -8,7 +8,7 @@ interface EmailJSConfigProps {
 
 const EmailJSConfig: React.FC<EmailJSConfigProps> = ({ userId }) => {
   useEffect(() => {
-    // Initialize EmailJS with your user ID
+    // Initialize EmailJS with your user ID (public key)
     emailjs.init(userId);
   }, [userId]);
 
