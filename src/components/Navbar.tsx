@@ -36,19 +36,22 @@ const Navbar = ({ className }: NavbarProps) => {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8">
-          <a href="#welcome" className="text-gray-300 hover:text-neon-blue transition-colors">
+          <a href="/#welcome" className="text-gray-300 hover:text-neon-blue transition-colors">
             Home
           </a>
-          <a href="#about" className="text-gray-300 hover:text-neon-blue transition-colors">
+          <a href="/#about" className="text-gray-300 hover:text-neon-blue transition-colors">
             About
           </a>
-          <a href="#projects" className="text-gray-300 hover:text-neon-blue transition-colors">
+          <a href="/#projects" className="text-gray-300 hover:text-neon-blue transition-colors">
             Projects
           </a>
-          <a href="#skills" className="text-gray-300 hover:text-neon-blue transition-colors">
+          <a href="/#skills" className="text-gray-300 hover:text-neon-blue transition-colors">
             Skills
           </a>
-          <a href="#contact" className="text-gray-300 hover:text-neon-blue transition-colors">
+          <Link to="/blog" className="text-gray-300 hover:text-neon-blue transition-colors">
+            Blog
+          </Link>
+          <a href="/#contact" className="text-gray-300 hover:text-neon-blue transition-colors">
             Contact
           </a>
         </div>
@@ -66,35 +69,42 @@ const Navbar = ({ className }: NavbarProps) => {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-cyber-darker/95 backdrop-blur-md py-4 px-6 flex flex-col space-y-4 border-t border-neon-blue/30">
           <a 
-            href="#welcome" 
+            href="/#welcome" 
             className="text-gray-300 hover:text-neon-blue transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Home
           </a>
           <a 
-            href="#about" 
+            href="/#about" 
             className="text-gray-300 hover:text-neon-blue transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             About
           </a>
           <a 
-            href="#projects" 
+            href="/#projects" 
             className="text-gray-300 hover:text-neon-blue transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Projects
           </a>
           <a 
-            href="#skills" 
+            href="/#skills" 
             className="text-gray-300 hover:text-neon-blue transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
             Skills
           </a>
+          <Link
+            to="/blog" 
+            className="text-gray-300 hover:text-neon-blue transition-colors py-2"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Blog
+          </Link>
           <a 
-            href="#contact" 
+            href="/#contact" 
             className="text-gray-300 hover:text-neon-blue transition-colors py-2"
             onClick={() => setMobileMenuOpen(false)}
           >
