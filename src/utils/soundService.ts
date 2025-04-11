@@ -28,7 +28,15 @@ const preloadSound = async (soundUrl: string): Promise<boolean> => {
     
     const response = await fetch(soundUrl);
     const arrayBuffer = await response.arrayBuffer();
-    audioBuffer = await context.decodeAudioBuffer(arrayBuffer);
+    
+    // Fix: Use decodeAudioData instead of decodeAudioBuffer
+    audioBuffer = await new Promise<AudioBuffer>((resolve, reject) => {
+      context.decodeAudioData(
+        arrayBuffer,
+        (buffer) => resolve(buffer),
+        (err) => reject(err)
+      );
+    });
     
     isLoaded = true;
     isLoading = false;
