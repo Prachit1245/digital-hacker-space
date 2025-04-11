@@ -5,7 +5,7 @@
 
 // Create an audio context for better handling of audio
 let audioContext: AudioContext | null = null;
-let audioBuffer: AudioBuffer | null = null;
+let clickSound: HTMLAudioElement | null = null;
 let isMuted = false;
 let isLoaded = false;
 let isLoading = false;
@@ -18,25 +18,33 @@ const initAudioContext = () => {
   return audioContext;
 };
 
-// Preload the sound file
+// Using a simpler approach with HTML5 Audio
 const preloadSound = async (soundUrl: string): Promise<boolean> => {
   if (isLoaded || isLoading) return isLoaded;
   
   try {
     isLoading = true;
-    const context = initAudioContext();
+    // Initialize audio context (needed for future Web Audio API usage)
+    initAudioContext();
     
-    const response = await fetch(soundUrl);
-    const arrayBuffer = await response.arrayBuffer();
+    // Create and load the audio element
+    clickSound = new Audio(soundUrl);
     
-    // Fix: Use decodeAudioData instead of decodeAudioBuffer
-    audioBuffer = await new Promise<AudioBuffer>((resolve, reject) => {
-      context.decodeAudioData(
-        arrayBuffer,
-        (buffer) => resolve(buffer),
-        (err) => reject(err)
-      );
+    // Return a promise that resolves when the audio is loaded
+    await new Promise<void>((resolve, reject) => {
+      if (!clickSound) return reject(new Error('Audio element not created'));
+      
+      clickSound.addEventListener('canplaythrough', () => resolve(), { once: true });
+      clickSound.addEventListener('error', (e) => reject(e), { once: true });
+      
+      // Start loading the audio
+      clickSound.load();
     });
+    
+    // Set volume to a subtle level
+    if (clickSound) {
+      clickSound.volume = 0.2;
+    }
     
     isLoaded = true;
     isLoading = false;
@@ -50,22 +58,13 @@ const preloadSound = async (soundUrl: string): Promise<boolean> => {
 
 // Play the sound effect
 const playSound = () => {
-  if (isMuted || !audioBuffer || !audioContext) return;
+  if (isMuted || !clickSound) return;
   
   try {
-    const source = audioContext.createBufferSource();
-    source.buffer = audioBuffer;
-    
-    // Create a gain node to control volume
-    const gainNode = audioContext.createGain();
-    gainNode.gain.value = 0.2; // Set volume to 20%
-    
-    // Connect the nodes
-    source.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    // Play the sound
-    source.start(0);
+    // Clone the audio to allow for rapid successive clicks
+    const soundToPlay = clickSound.cloneNode() as HTMLAudioElement;
+    soundToPlay.volume = 0.2; // Set volume to 20%
+    soundToPlay.play().catch(err => console.warn('Error playing sound:', err));
   } catch (error) {
     console.warn('Error playing sound:', error);
   }

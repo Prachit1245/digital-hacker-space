@@ -3,33 +3,47 @@ import { useEffect, useState } from 'react';
 import { soundService } from '@/utils/soundService';
 import { Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
 
-const SOUND_PATH = '/assets/sounds/click.mp3'; 
+// Using a default click sound from a CDN so it works immediately
+const SOUND_PATH = 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3';
 
 const SoundController = () => {
   const [isMuted, setIsMuted] = useState(soundService.isSoundMuted());
   const [showControls, setShowControls] = useState(false);
+  const [soundInitialized, setSoundInitialized] = useState(false);
 
   // Initialize audio and add listeners when component mounts
   useEffect(() => {
-    // Preload the sound file
-    soundService.preloadSound(SOUND_PATH).catch(error => {
-      console.warn('Sound preloading failed:', error);
-    });
+    // Try to preload the sound file
+    const initializeSound = async () => {
+      try {
+        // Initialize audio context early to handle user gesture requirements
+        soundService.initAudioContext();
+        
+        // Preload the sound file
+        const loaded = await soundService.preloadSound(SOUND_PATH);
+        setSoundInitialized(loaded);
+        
+        if (loaded) {
+          // Only show toast if sound loads successfully
+          toast({
+            title: "Sound enabled",
+            description: "Click buttons to hear feedback. Use the sound toggle in the corner to mute.",
+            duration: 3000,
+          });
+        }
+      } catch (error) {
+        console.warn('Sound initialization failed:', error);
+      }
+    };
+
+    initializeSound();
 
     // Function to handle button clicks
     const handleButtonClick = () => {
       soundService.playSound();
     };
-
-    // Initialize audio context on first user interaction
-    const initializeAudio = () => {
-      soundService.initAudioContext();
-      document.removeEventListener('click', initializeAudio);
-    };
-
-    // Add event listener to initialize audio context
-    document.addEventListener('click', initializeAudio, { once: true });
 
     // Add event listeners to all buttons
     const buttons = document.querySelectorAll('button');
@@ -39,7 +53,6 @@ const SoundController = () => {
 
     // Cleanup function
     return () => {
-      document.removeEventListener('click', initializeAudio);
       buttons.forEach(button => {
         button.removeEventListener('click', handleButtonClick);
       });
@@ -50,6 +63,11 @@ const SoundController = () => {
   const toggleMute = () => {
     const newMutedState = soundService.toggleMute();
     setIsMuted(newMutedState);
+    
+    toast({
+      title: newMutedState ? "Sound muted" : "Sound unmuted",
+      duration: 2000,
+    });
   };
 
   return (
