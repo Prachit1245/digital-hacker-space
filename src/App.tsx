@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import EmailJSConfig from "./components/EmailJSConfig";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import SoundController from "./components/SoundController";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <EmailJSConfig userId={EMAILJS_USER_ID} />
+      <SoundController />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
