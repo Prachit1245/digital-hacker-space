@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { Link } from 'react-router-dom';
@@ -7,6 +6,16 @@ import { ArrowLeft } from 'lucide-react';
 
 // Sample blog posts data - this can be moved to a separate file later
 const blogPosts = [
+  {
+    id: 4,
+    title: "When Servers Go Silent: What the Ncell Data Outage Taught Us About Nepal's Digital Fragility",
+    slug: "ncell-data-outage-nepal",
+    excerpt: "On April 5, 2025, millions of Nepalis woke up to a chilling realization: no mobile data, no calls, no internet. The country's largest telecom service provider, Ncell, experienced a massive nationwide network and data outage.",
+    coverImage: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    date: "April 9, 2025",
+    tags: ["Technology", "Nepal", "Infrastructure", "Telecom"],
+    readTime: "7 min read"
+  },
   {
     id: 1,
     title: "Getting Started with React in 2025",

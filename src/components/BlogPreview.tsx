@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -6,6 +5,16 @@ import BlogPostCard from './BlogPostCard';
 
 // Sample blog posts for the preview
 const recentBlogPosts = [
+  {
+    id: 4,
+    title: "When Servers Go Silent: What the Ncell Data Outage Taught Us About Nepal's Digital Fragility",
+    slug: "ncell-data-outage-nepal",
+    excerpt: "On April 5, 2025, millions of Nepalis woke up to a chilling realization: no mobile data, no calls, no internet. The country's largest telecom service provider, Ncell, experienced a massive nationwide network and data outage.",
+    coverImage: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    date: "April 9, 2025",
+    tags: ["Technology", "Nepal", "Infrastructure", "Telecom"],
+    readTime: "7 min read"
+  },
   {
     id: 1,
     title: "Getting Started with React in 2025",
@@ -25,16 +34,6 @@ const recentBlogPosts = [
     date: "April 2, 2025",
     tags: ["Cybersecurity", "Best Practices", "Development"],
     readTime: "8 min read"
-  },
-  {
-    id: 3,
-    title: "Advanced TypeScript Patterns for Better Code",
-    slug: "advanced-typescript-patterns",
-    excerpt: "Discover advanced TypeScript patterns and techniques to write more maintainable and robust code.",
-    coverImage: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80",
-    date: "March 29, 2025",
-    tags: ["TypeScript", "JavaScript", "Programming"],
-    readTime: "6 min read"
   }
 ];
 
