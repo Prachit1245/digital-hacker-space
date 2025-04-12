@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -5,6 +6,16 @@ import BlogPostCard from './BlogPostCard';
 
 // Sample blog posts for the preview
 const recentBlogPosts = [
+  {
+    id: 5,
+    title: "The Humane AI Pin is Here — Welcome to the Screenless Future",
+    slug: "humane-ai-pin-screenless-future",
+    excerpt: "Explore how the Humane AI Pin is changing the tech landscape by introducing screenless, AI-powered wearable technology. Is this the future beyond smartphones?",
+    coverImage: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80",
+    date: "April 12, 2025",
+    tags: ["AI", "Wearable Tech", "Future Tech"],
+    readTime: "6 min read"
+  },
   {
     id: 4,
     title: "When Servers Go Silent: What the Ncell Data Outage Taught Us About Nepal's Digital Fragility",
@@ -24,16 +35,6 @@ const recentBlogPosts = [
     date: "April 5, 2025",
     tags: ["React", "JavaScript", "Web Development"],
     readTime: "5 min read"
-  },
-  {
-    id: 2,
-    title: "Cybersecurity Essentials Every Developer Should Know",
-    slug: "cybersecurity-essentials",
-    excerpt: "Protect your applications with these essential cybersecurity practices that every developer should implement.",
-    coverImage: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    date: "April 2, 2025",
-    tags: ["Cybersecurity", "Best Practices", "Development"],
-    readTime: "8 min read"
   }
 ];
 

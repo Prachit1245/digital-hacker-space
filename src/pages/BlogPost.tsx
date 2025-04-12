@@ -1,12 +1,131 @@
+
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import { ArrowLeft, Calendar, Clock, Share2, WifiOff, Smartphone, Network } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Share2, WifiOff, Smartphone, Network, Eye, Zap, Lightbulb, Scan } from 'lucide-react';
 import { toast } from 'sonner';
 
 // This is a placeholder for blog post data
 // In a real implementation, you would fetch this from your backend or CMS
 const blogPosts = [
+  {
+    id: 5,
+    title: "The Humane AI Pin is Here — Welcome to the Screenless Future",
+    slug: "humane-ai-pin-screenless-future",
+    excerpt: "Explore how the Humane AI Pin is changing the tech landscape by introducing screenless, AI-powered wearable technology. Is this the future beyond smartphones?",
+    coverImage: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80",
+    date: "April 12, 2025",
+    tags: ["AI", "Wearable Tech", "Future Tech"],
+    readTime: "6 min read",
+    content: `
+      <div class="flex justify-center mb-6">
+        <div class="inline-flex items-center gap-4 bg-blue-100 text-blue-800 px-6 py-3 rounded-lg">
+          <Zap size={24} />
+          <span class="font-semibold">Tech Innovation Spotlight</span>
+        </div>
+      </div>
+      
+      <h2 class="text-2xl font-bold mb-4">👋 Say Hello to Screenless Tech</h2>
+      <p>We live in a world where we're constantly staring at screens — phones, laptops, TVs, smartwatches — it never stops. But what if the future of technology wasn't a screen? What if it was invisible?</p>
+      
+      <p>Enter: Humane AI Pin — a futuristic wearable device that blends artificial intelligence, laser projection, and voice-first interaction into one tiny piece of tech that could change everything.</p>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">🔍 What is the Humane AI Pin?</h2>
+      <p>Developed by former Apple executives, the Humane AI Pin is a small, stylish device you wear on your shirt. It uses voice commands, a camera, sensors, and even laser projection to assist you without ever needing to pull out your phone.</p>
+      
+      <h3 class="text-xl font-bold mt-6 mb-3">📌 Key Features:</h3>
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li>Laser display that projects info onto your palm</li>
+        <li>AI assistant powered by cloud-based models</li>
+        <li>Privacy-focused mic with visible indicators</li>
+        <li>No screen, no apps — just interaction</li>
+      </ul>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <div class="flex items-center gap-3 mb-4 text-neon-blue">
+            <Lightbulb size={28} />
+            <h3 class="font-semibold text-lg">Innovation Points</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>First truly mainstream screenless device</li>
+            <li>Uses advanced AI to understand context</li>
+            <li>Combines multiple sensors for awareness</li>
+            <li>Palm projection creates virtual display</li>
+          </ul>
+        </div>
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <div class="flex items-center gap-3 mb-4 text-neon-purple">
+            <Scan size={28} />
+            <h3 class="font-semibold text-lg">Technical Specs</h3>
+          </div>
+          <ul class="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Powerful onboard processor</li>
+            <li>AI models run both on device and in cloud</li>
+            <li>Camera with privacy shutters</li>
+            <li>Gesture and touch recognition</li>
+            <li>All-day battery life</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">🚨 Why It Matters</h2>
+      <p>We spend 7+ hours daily on screens. That has consequences:</p>
+      
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li>Eye strain</li>
+        <li>Anxiety and overstimulation</li>
+        <li>Sleep cycle disruption</li>
+        <li>Lower productivity</li>
+      </ul>
+      
+      <p>The Humane AI Pin is the first serious step toward a post-smartphone world — a world where technology helps without overwhelming us.</p>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">🌍 The Bigger Picture: A Shift in Tech</h2>
+      <p>The AI Pin is just the beginning. Big players like Meta, Apple, and Google are all moving toward ambient computing — tech that quietly assists in the background.</p>
+      
+      <p>Expect the rise of:</p>
+      
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li>Smart glasses</li>
+        <li>Neural interfaces</li>
+        <li>AI-first devices</li>
+        <li>Wearables with no screens</li>
+      </ul>
+      
+      <p>This is the next user interface revolution.</p>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">🤖 What It Means for Developers & Designers</h2>
+      <p>If you're in tech, get ready to:</p>
+      
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li>Learn voice UX and natural language design</li>
+        <li>Create screenless, gesture-first interactions</li>
+        <li>Embrace AI-first thinking in product development</li>
+      </ul>
+      
+      <p>The old rules don't apply here.</p>
+      
+      <h2 class="text-2xl font-bold mt-8 mb-4">🔮 Final Thoughts: Is This the Future?</h2>
+      <p>The Humane AI Pin may not be perfect yet, but it's a bold vision of what comes next — a future where we're not distracted by tech but empowered by it.</p>
+      
+      <p>This isn't just innovation — it's evolution.</p>
+      
+      <div class="bg-gray-50 p-6 rounded-lg my-8">
+        <h3 class="text-xl font-semibold mb-4">💬 What do you think?</h3>
+        <p>Are you excited about screenless technology? Would you wear an AI Pin? Let's discuss in the comments below!</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#AI</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#HumanePin</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#WearableTech</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#FutureOfTech</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#ScreenlessTech</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#ArtificialIntelligence</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#TechTrends2025</span>
+        </div>
+      </div>
+    `
+  },
   {
     id: 4,
     title: "When Servers Go Silent: What the Ncell Data Outage Taught Us About Nepal's Digital Fragility",
