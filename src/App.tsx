@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import EmailJSConfig from "./components/EmailJSConfig";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Tools from "./pages/Tools";
 import SoundController from "./components/SoundController";
 
 const queryClient = new QueryClient();
@@ -28,7 +29,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/tools" element={<Tools />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
