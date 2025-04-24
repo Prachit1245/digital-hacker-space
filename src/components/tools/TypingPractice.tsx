@@ -13,7 +13,7 @@ type TimeOption = 60 | 180;
 const sampleTexts = {
   english: "The quick brown fox jumps over the lazy dog. Programming is the process of taking an algorithm and encoding it into a notation, a programming language, so that it can be executed by a computer. Although many programming languages and many different types of computers exist, the important first step is the need to have the solution.",
   nepali: "नेपाल एक सुन्दर देश हो। यहाँ हिमाल, पहाड र तराई गरी तीन भू-भाग छन्। नेपालमा विविध संस्कृति र परम्परा छन्। नेपालीहरू मिलनसार र मेहनती हुन्छन्।",
-  preeti: "g]kfn Ps ;'Gb/ b]z xf] . oxfF lxdfn, kxf8 / t/fO{ u/L tLg e"–efu 5g\\ . g]kfndf ljljw ;+:s[lt / k/Dk/f 5g\\ . g]kfnLx? ldng;f/ / d]xgtL x'G5g\\ ."
+  preeti: "g]kfn Ps ;'Gb/ b]z xf] . oxfF lxdfn, kxf8 / t/fO{ u/L tLg e'–efu 5g\\. g]kfndf ljljw ;+:s[lt / k/Dk/f 5g\\. g]kfnLx? ldng;f/ / d]xgtL x'G5g\\."
 };
 
 const TypingPractice = () => {
@@ -40,7 +40,6 @@ const TypingPractice = () => {
 
   // Handle time option change
   const handleTimeOptionChange = (value: string) => {
-    // Convert the string to a number and then to TimeOption
     const newTimeOption = Number(value) as TimeOption;
     setTimeOption(newTimeOption);
     setTimeLeft(newTimeOption);
@@ -84,13 +83,11 @@ const TypingPractice = () => {
     setIsFinished(true);
     setIsStarted(false);
     
-    // Calculate WPM: (typed characters / 5) / time in minutes
     const timeInMinutes = (timeOption - timeLeft) / 60;
     const words = typedText.length / 5;
     const calculatedWpm = timeInMinutes > 0 ? Math.round(words / timeInMinutes) : 0;
     setWpm(calculatedWpm);
     
-    // Show completion toast
     toast({
       title: "Test Complete!",
       description: `You typed at ${calculatedWpm} WPM with ${accuracy}% accuracy.`,
@@ -117,7 +114,6 @@ const TypingPractice = () => {
     const newTypedText = e.target.value;
     setTypedText(newTypedText);
     
-    // Calculate accuracy and errors
     let errorCount = 0;
     for (let i = 0; i < newTypedText.length; i++) {
       if (newTypedText[i] !== currentText[i]) {
@@ -129,7 +125,6 @@ const TypingPractice = () => {
     const calculatedAccuracy = Math.max(0, Math.round(((newTypedText.length - errorCount) / Math.max(1, newTypedText.length)) * 100));
     setAccuracy(calculatedAccuracy);
     
-    // Check if completed the test by typing the entire text
     if (newTypedText.length >= currentText.length) {
       endTest();
     }
