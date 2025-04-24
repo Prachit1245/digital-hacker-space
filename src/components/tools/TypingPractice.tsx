@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,7 +13,7 @@ type TimeOption = 60 | 180;
 const sampleTexts = {
   english: "The quick brown fox jumps over the lazy dog. Programming is the process of taking an algorithm and encoding it into a notation, a programming language, so that it can be executed by a computer. Although many programming languages and many different types of computers exist, the important first step is the need to have the solution.",
   nepali: "नेपाल एक सुन्दर देश हो। यहाँ हिमाल, पहाड र तराई गरी तीन भू-भाग छन्। नेपालमा विविध संस्कृति र परम्परा छन्। नेपालीहरू मिलनसार र मेहनती हुन्छन्।",
-  preeti: "g]kfn Ps ;'Gb/ b]z xf] . oxf" lxdfn, kxf8 / t/fO{ u/L tLg e"–efu 5g\ . g]kfndf ljljw ;+:s[lt / k/Dk/f 5g\ . g]kfnLx? ldng;f/ / d]xgtL x'G5g\ ."
+  preeti: "g]kfn Ps ;'Gb/ b]z xf] . oxfF lxdfn, kxf8 / t/fO{ u/L tLg e"–efu 5g\\ . g]kfndf ljljw ;+:s[lt / k/Dk/f 5g\\ . g]kfnLx? ldng;f/ / d]xgtL x'G5g\\ ."
 };
 
 const TypingPractice = () => {
