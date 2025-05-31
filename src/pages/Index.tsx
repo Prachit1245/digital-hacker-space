@@ -9,6 +9,7 @@ import ContactSection from '@/components/ContactSection';
 import CyberCube from '@/components/CyberCube';
 import GlitchHeading from '@/components/GlitchHeading';
 import BlogPreview from '@/components/BlogPreview';
+import JobsSection from '@/components/JobsSection';
 import { ArrowDown, Github, ExternalLink, Terminal, Code } from 'lucide-react';
 
 const Index = () => {
@@ -182,6 +183,17 @@ const Index = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-[-1]"></div>
       <div className="absolute inset-0 circuit-bg opacity-5 z-[-1]"></div>
       
+      <section id="experience" className="py-20 px-4 sm:px-6 relative">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Professional Experience</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">My journey in the tech industry</p>
+          
+          <JobsSection />
+        </div>
+      </section>
+      
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white z-[-1]"></div>
+      
       <section id="projects" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">Featured Projects</h2>
@@ -215,7 +227,7 @@ const Index = () => {
         </div>
       </section>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white z-[-1]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-[-1]"></div>
       
       <section id="skills" className="py-20 px-4 sm:px-6 relative">
         <div className="max-w-6xl mx-auto">
