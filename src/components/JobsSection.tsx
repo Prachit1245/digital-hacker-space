@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ExternalLink, MapPin, Calendar, Building2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
@@ -10,7 +9,7 @@ const JobsSection = () => {
       title: 'IT Monitoring & Escalation Assistant',
       company: 'CIS',
       companyFull: 'CIS (US Company)',
-      location: 'Nepal (Remote)',
+      location: 'Parbat, Nepal (Remote)',
       startDate: 'May 1, 2025',
       endDate: 'Present',
       description: 'Responsible for monitoring IT systems and managing escalation procedures to ensure optimal system performance and quick resolution of technical issues. Handle critical system alerts, coordinate with technical teams, and maintain system uptime across enterprise infrastructure.',

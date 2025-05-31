@@ -80,7 +80,7 @@ const Index = () => {
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <div className="mb-8 profile-image-container inline-block">
             <img 
-              src="/lovable-uploads/849fd63f-1814-4e72-a447-0d5359e05bdf.png" 
+              src="/lovable-uploads/0898bc91-587e-42f5-b289-f2aff3a331b7.png" 
               alt="Prachit Regmi" 
               className="profile-image w-32 h-32 object-cover rounded-full border-2 border-neon-blue gpu"
               loading="eager"
@@ -155,7 +155,7 @@ const Index = () => {
                 Who Am I?
               </h3>
               <p className="text-gray-700 mb-4">
-                I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Kathmandu, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects.
+                I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Parbat, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects.
               </p>
               <p className="text-gray-700 mb-4">
                 My journey in computer science began when I was fascinated by how technology can transform lives and solve complex problems. Since then, I've been on a mission to expand my knowledge and skills across various domains of computer science.
