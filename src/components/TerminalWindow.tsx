@@ -1,7 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import TypewriterText from './TypewriterText';
 
 interface TerminalProps {
   className?: string;
@@ -18,11 +17,12 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<TerminalCommand[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
   const commands = {
-    'about-me': "I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Kathmandu, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects. My journey in computer science began when I was fascinated by how technology can transform lives and solve complex problems.",
+    'about-me': "I'm Prachit Regmi, a passionate CSIT student & tech enthusiast from Parbat, Nepal. I love exploring new technologies, building innovative solutions, and contributing to open-source projects. My journey in computer science began when I was fascinated by how technology can transform lives and solve complex problems.",
     
     'skills': (
       <div className="space-y-2 my-2">
@@ -32,8 +32,8 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
             <span>JavaScript/TypeScript</span>
             <span className="text-neon-blue">★★★★★</span>
           </div>
-          <div className="progress-bar mt-1 mb-2">
-            <div className="progress-value" style={{ width: '92%' }}></div>
+          <div className="w-full bg-gray-700 rounded-full h-1 mt-1 mb-2">
+            <div className="bg-neon-blue h-1 rounded-full" style={{ width: '92%' }}></div>
           </div>
         </div>
         
@@ -42,8 +42,8 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
             <span>React/Next.js</span>
             <span className="text-neon-blue">★★★★☆</span>
           </div>
-          <div className="progress-bar mt-1 mb-2">
-            <div className="progress-value" style={{ width: '85%' }}></div>
+          <div className="w-full bg-gray-700 rounded-full h-1 mt-1 mb-2">
+            <div className="bg-neon-blue h-1 rounded-full" style={{ width: '85%' }}></div>
           </div>
         </div>
         
@@ -52,8 +52,8 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
             <span>Node.js/Express</span>
             <span className="text-neon-blue">★★★★☆</span>
           </div>
-          <div className="progress-bar mt-1 mb-2">
-            <div className="progress-value" style={{ width: '80%' }}></div>
+          <div className="w-full bg-gray-700 rounded-full h-1 mt-1 mb-2">
+            <div className="bg-neon-blue h-1 rounded-full" style={{ width: '80%' }}></div>
           </div>
         </div>
         
@@ -62,8 +62,8 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
             <span>Python</span>
             <span className="text-neon-blue">★★★★☆</span>
           </div>
-          <div className="progress-bar mt-1 mb-2">
-            <div className="progress-value" style={{ width: '78%' }}></div>
+          <div className="w-full bg-gray-700 rounded-full h-1 mt-1 mb-2">
+            <div className="bg-neon-blue h-1 rounded-full" style={{ width: '78%' }}></div>
           </div>
         </div>
         
@@ -72,8 +72,8 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
             <span>Database (SQL/NoSQL)</span>
             <span className="text-neon-blue">★★★☆☆</span>
           </div>
-          <div className="progress-bar mt-1 mb-2">
-            <div className="progress-value" style={{ width: '70%' }}></div>
+          <div className="w-full bg-gray-700 rounded-full h-1 mt-1 mb-2">
+            <div className="bg-neon-blue h-1 rounded-full" style={{ width: '70%' }}></div>
           </div>
         </div>
       </div>
@@ -139,10 +139,10 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
     ),
     
     'clear': 'CLEAR',
-    
     '': ''
   };
 
+  // Initialize welcome message
   useEffect(() => {
     if (welcomeMessage) {
       setHistory([
@@ -153,35 +153,48 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
         }
       ]);
     }
-    
-    // Focus input on component mount
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
   }, [welcomeMessage]);
 
+  // Auto-scroll to bottom when history updates
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [history]);
 
+  // Focus input when component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Terminal command submitted:', input);
+    
+    if (!input.trim()) return;
     
     const trimmedInput = input.trim().toLowerCase();
-    const command = trimmedInput;
+    
+    // Add to command history
+    setCommandHistory(prev => [...prev, input]);
     
     let output: string | JSX.Element = "Command not found. Type 'help' for available commands.";
     
-    if (command in commands) {
-      output = commands[command as keyof typeof commands];
-      
-      if (command === 'clear') {
-        setHistory([]);
-        setInput('');
-        return;
-      }
+    if (trimmedInput === 'clear') {
+      setHistory([]);
+      setInput('');
+      setHistoryIndex(-1);
+      return;
+    }
+    
+    if (trimmedInput in commands) {
+      output = commands[trimmedInput as keyof typeof commands];
     }
     
     const newCommand: TerminalCommand = {
@@ -194,13 +207,15 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
     setInput('');
     setHistoryIndex(-1);
     
-    // Re-focus the input after submission
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    // Re-focus input
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 10);
   };
 
-  const focusInput = () => {
+  const handleTerminalClick = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -209,19 +224,17 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      
-      if (history.length > 0 && historyIndex < history.length - 1) {
-        const newIndex = historyIndex === -1 ? 0 : historyIndex + 1;
+      if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+        const newIndex = historyIndex + 1;
         setHistoryIndex(newIndex);
-        setInput(history[history.length - 1 - newIndex].input);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex]);
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      
       if (historyIndex > 0) {
         const newIndex = historyIndex - 1;
         setHistoryIndex(newIndex);
-        setInput(history[history.length - 1 - newIndex].input);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex]);
       } else if (historyIndex === 0) {
         setHistoryIndex(-1);
         setInput('');
@@ -232,51 +245,56 @@ const TerminalWindow = ({ className, welcomeMessage }: TerminalProps) => {
   return (
     <div 
       className={cn(
-        "terminal-window relative overflow-hidden h-[350px]", // Added fixed height
+        "bg-gray-900 rounded-lg border border-gray-700 shadow-xl overflow-hidden h-[400px] font-mono text-sm cursor-text",
         className
       )}
-      onClick={focusInput}
-      ref={terminalRef}
+      onClick={handleTerminalClick}
     >
       {/* Terminal Header */}
-      <div className="absolute top-0 left-0 right-0 bg-cyber-dark border-b border-neon-blue/30 p-2 flex items-center">
-        <div className="flex gap-1.5">
+      <div className="bg-gray-800 border-b border-gray-700 p-3 flex items-center">
+        <div className="flex gap-2">
           <div className="w-3 h-3 rounded-full bg-red-500"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
         </div>
-        <div className="mx-auto text-xs text-neon-blue opacity-70">
-          prachit@hacker-terminal ~ $
+        <div className="mx-auto text-xs text-gray-400">
+          prachit@terminal ~ $
         </div>
       </div>
       
       {/* Terminal Content */}
-      <div className="pt-8 pb-2 px-3 overflow-y-auto h-full">
+      <div 
+        ref={terminalRef}
+        className="p-4 overflow-y-auto h-[calc(100%-52px)] bg-gray-900"
+      >
         {history.map((item, index) => (
-          <div key={index} className="mb-2">
+          <div key={index} className="mb-3">
             {item.input !== 'system' ? (
               <>
-                <div className="text-neon-green">
-                  prachit@hacker-terminal ~ $ <span className="text-white">{item.input}</span>
+                <div className="text-green-400 flex items-center gap-2">
+                  <span>prachit@terminal ~ $</span>
+                  <span className="text-white">{item.input}</span>
                 </div>
-                <div className="text-gray-300 mt-1">{item.output}</div>
+                <div className="text-gray-300 mt-1 ml-4">{item.output}</div>
               </>
             ) : (
-              <div className="text-neon-blue">{item.output}</div>
+              <div className="text-blue-400 mb-2">{item.output}</div>
             )}
           </div>
         ))}
         
         <form onSubmit={handleSubmit} className="flex items-center">
-          <span className="text-neon-green">prachit@hacker-terminal ~ $</span>
+          <span className="text-green-400 mr-2">prachit@terminal ~ $</span>
           <input
             ref={inputRef}
             type="text"
-            className="flex-1 bg-transparent border-none focus:outline-none text-white px-2 py-1"
+            className="flex-1 bg-transparent border-none focus:outline-none text-white caret-green-400"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            autoFocus
+            placeholder="Type 'help' for available commands..."
+            autoComplete="off"
+            spellCheck="false"
           />
         </form>
       </div>
