@@ -57,6 +57,13 @@ const Navbar = () => {
     });
   };
 
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('order-website');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
@@ -71,6 +78,12 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-neon-blue transition-colors">
               Home
             </Link>
+            <button
+              onClick={scrollToServices}
+              className="text-gray-700 hover:text-neon-blue transition-colors"
+            >
+              Services
+            </button>
             <Link to="/blog" className="text-gray-700 hover:text-neon-blue transition-colors">
               Blog
             </Link>
@@ -108,6 +121,12 @@ const Navbar = () => {
             <Link to="/" className="block py-2 text-gray-700 hover:text-neon-blue" onClick={closeMenu}>
               Home
             </Link>
+            <button
+              onClick={() => { scrollToServices(); closeMenu(); }}
+              className="block py-2 text-gray-700 hover:text-neon-blue w-full text-left"
+            >
+              Services
+            </button>
             <Link to="/blog" className="block py-2 text-gray-700 hover:text-neon-blue" onClick={closeMenu}>
               Blog
             </Link>
