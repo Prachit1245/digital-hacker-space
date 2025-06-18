@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -78,31 +79,31 @@ const Index = () => {
       description: 'A cybersecurity tool that scans websites for common vulnerabilities and provides detailed reports.',
       tags: ['Python', 'Security', 'API'],
       image: 'https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80',
-      github: 'https://github.com',
-      link: 'https://example.com'
+      github: 'https://github.com/Prachit1245',
+      link: 'https://observatory.mozilla.org/'
     },
     {
       title: 'DataVista',
       description: 'Interactive data visualization dashboard for big data analytics with real-time updates.',
       tags: ['React', 'D3.js', 'Firebase'],
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      github: 'https://github.com',
-      link: 'https://example.com'
+      github: 'https://github.com/Prachit1245',
+      link: 'https://observablehq.com/@d3/gallery'
     },
     {
       title: 'NepaliNLP',
       description: 'Natural language processing library for Nepali language with sentiment analysis capabilities.',
       tags: ['Python', 'NLP', 'Machine Learning'],
       image: 'https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      github: 'https://github.com',
+      github: 'https://github.com/Prachit1245',
     },
     {
       title: 'SmartTask',
       description: 'Productivity application with AI-powered task management and scheduling features.',
       tags: ['React Native', 'Node.js', 'AI'],
       image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      github: 'https://github.com',
-      link: 'https://example.com'
+      github: 'https://github.com/Prachit1245',
+      link: 'https://todoist.com/app'
     },
   ];
   
@@ -255,7 +256,7 @@ const Index = () => {
           
           <div className="mt-12 text-center">
             <a 
-              href="https://github.com/prachitregmi" 
+              href="https://github.com/Prachit1245" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 rounded-md bg-neon-blue/20 hover:bg-neon-blue/30 border border-neon-blue transition-all duration-300 gap-2 group hover:translate-y-[-3px] hover:shadow-lg"
