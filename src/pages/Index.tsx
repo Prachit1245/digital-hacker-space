@@ -17,13 +17,15 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Ensure page starts at the top
-    window.scrollTo(0, 0);
+    // Force scroll to top immediately when component mounts
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     
-    // Additional scroll reference if needed
-    if (welcomeRef.current) {
-      welcomeRef.current.scrollIntoView({ block: 'start', behavior: 'auto' });
-    }
+    // Also set scroll position after a brief delay to ensure it takes effect
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 50);
+    
+    return () => clearTimeout(timer);
   }, []);
   
   const scrollToProjects = () => {
