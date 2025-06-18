@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -18,29 +17,51 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Multiple approaches to ensure page loads from top
-    // 1. Immediate scroll to top
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    
-    // 2. Force scroll after brief delay
-    const timer1 = setTimeout(() => {
+    // Aggressive scroll to top - multiple methods
+    const scrollToTop = () => {
+      // Method 1: Standard window scroll
       window.scrollTo(0, 0);
+      
+      // Method 2: Direct element scroll
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    }, 10);
+      
+      // Method 3: Set scroll behavior to auto for instant scroll
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      
+      // Method 4: Force scroll on the html element
+      const htmlElement = document.querySelector('html');
+      if (htmlElement) {
+        htmlElement.scrollTop = 0;
+      }
+      
+      // Method 5: Check if welcome section exists and scroll to it
+      if (welcomeRef.current) {
+        welcomeRef.current.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    };
     
-    // 3. Additional backup scroll
-    const timer2 = setTimeout(() => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 100);
+    // Execute immediately
+    scrollToTop();
+    
+    // Execute after DOM is fully rendered
+    const timer1 = setTimeout(scrollToTop, 0);
+    const timer2 = setTimeout(scrollToTop, 10);
+    const timer3 = setTimeout(scrollToTop, 100);
+    const timer4 = setTimeout(scrollToTop, 300);
+    
+    // Reset scroll behavior after forcing position
+    const resetScrollBehavior = setTimeout(() => {
+      document.documentElement.style.scrollBehavior = 'smooth';
+    }, 500);
     
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearTimeout(timer4);
+      clearTimeout(resetScrollBehavior);
     };
   }, []);
   
