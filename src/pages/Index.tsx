@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -17,15 +18,30 @@ const Index = () => {
   const welcomeRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Force scroll to top immediately when component mounts
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Multiple approaches to ensure page loads from top
+    // 1. Immediate scroll to top
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     
-    // Also set scroll position after a brief delay to ensure it takes effect
-    const timer = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, 50);
+    // 2. Force scroll after brief delay
+    const timer1 = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
     
-    return () => clearTimeout(timer);
+    // 3. Additional backup scroll
+    const timer2 = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 100);
+    
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
   
   const scrollToProjects = () => {
