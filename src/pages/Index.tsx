@@ -1,4 +1,5 @@
 
+
 import { useEffect, useRef } from 'react';
 import MatrixBackground from '@/components/MatrixBackground';
 import TypewriterText from '@/components/TypewriterText';
@@ -75,20 +76,20 @@ const Index = () => {
   
   const projectData = [
     {
-      title: 'CyberGuard',
-      description: 'A cybersecurity tool that scans websites for common vulnerabilities and provides detailed reports.',
-      tags: ['Python', 'Security', 'API'],
-      image: 'https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80',
+      title: 'Adhyaya College Website',
+      description: 'Modern educational website for Adhyaya College with comprehensive course information, admission details, and student portal.',
+      tags: ['React', 'Node.js', 'Education'],
+      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       github: 'https://github.com/Prachit1245',
-      link: 'https://observatory.mozilla.org/'
+      link: 'https://adhyaya.edu.np/'
     },
     {
-      title: 'DataVista',
-      description: 'Interactive data visualization dashboard for big data analytics with real-time updates.',
-      tags: ['React', 'D3.js', 'Firebase'],
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      title: 'Nepal Dev Center',
+      description: 'Professional website for Nepal Development Center organization showcasing their initiatives, projects, and community impact.',
+      tags: ['React', 'Web Development', 'Organization'],
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       github: 'https://github.com/Prachit1245',
-      link: 'https://observablehq.com/@d3/gallery'
+      link: 'https://nepaldevcenter.com.np/'
     },
     {
       title: 'NepaliNLP',
