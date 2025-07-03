@@ -207,8 +207,8 @@ const ContactSection = ({ className }: ContactSectionProps) => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-400">LinkedIn</h4>
-                  <a href="https://linkedin.com/in/prachitregmi" target="_blank" rel="noopener noreferrer" className="text-neon-green hover:underline">
-                    linkedin.com/in/prachitregmi
+                  <a href="https://linkedin.com/in/prachit-regmi" target="_blank" rel="noopener noreferrer" className="text-neon-green hover:underline">
+                    linkedin.com/in/prachit-regmi
                   </a>
                 </div>
               </div>
