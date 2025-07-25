@@ -9,6 +9,70 @@ import { toast } from 'sonner';
 // In a real implementation, you would fetch this from your backend or CMS
 const blogPosts = [
   {
+    id: 6,
+    title: "The Rise of Digital Freelancing Among Nepali Youth",
+    slug: "digital-freelancing-nepali-youth",
+    excerpt: "A silent revolution is reshaping how young Nepalis work and earn. Digital freelancing is becoming a top career path, offering financial independence and global opportunities.",
+    coverImage: "/src/assets/digital-freelancing-nepal.jpg",
+    date: "July 25, 2025",
+    tags: ["Freelancing", "Nepal", "Digital Economy"],
+    readTime: "4 min read",
+    content: `
+      <h2>💻 What's Driving the Shift?</h2>
+      <p><strong>Internet Accessibility:</strong> With expanding 4G coverage and cheaper internet packages, even students from remote districts are now participating in the global gig economy.</p>
+      
+      <p><strong>Economic Pressure:</strong> With limited job opportunities in Nepal, especially for fresh graduates, freelancing offers an alternative route to financial independence.</p>
+      
+      <p><strong>Global Platforms:</strong> Websites like Fiverr, Upwork, and Freelancer are allowing Nepali talent to reach international clients and earn in dollars — all from a laptop and internet connection.</p>
+      
+      <h2>🌱 Skills That Are in Demand</h2>
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li>Graphic Design & Video Editing</li>
+        <li>Web Development & App Design</li>
+        <li>SEO and Digital Marketing</li>
+        <li>Content Writing & Transcription</li>
+        <li>AI and Prompt Engineering</li>
+      </ul>
+      
+      <p>Thanks to YouTube, free courses, and bootcamps, it's never been easier to learn these in-demand skills.</p>
+      
+      <h2>🚀 The Benefits for Nepali Youth</h2>
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li><strong>Flexibility:</strong> Work from anywhere, anytime.</li>
+        <li><strong>Higher Income Potential:</strong> Even a part-time freelancer can earn more than a local full-time salary.</li>
+        <li><strong>Global Exposure:</strong> Working with international clients boosts experience and confidence.</li>
+        <li><strong>Escape from Brain Drain:</strong> Many talented youths are now choosing to stay in Nepal while working remotely.</li>
+      </ul>
+      
+      <h2>🔥 Real-life Example</h2>
+      <p>Just recently, I met a 19-year-old from Pokhara who learned video editing on his phone during lockdown. Today, he edits content for U.S.-based YouTubers and earns over NPR 30,000/month — without ever leaving his room.</p>
+      
+      <h2>⚠️ Challenges Still Exist</h2>
+      <ul class="list-disc pl-6 mb-6 space-y-2">
+        <li>Payment gateway issues (PayPal not supported in Nepal)</li>
+        <li>Lack of awareness in rural areas</li>
+        <li>English communication barrier</li>
+      </ul>
+      
+      <p>But despite these hurdles, the momentum is strong — and growing.</p>
+      
+      <h2>🧠 Final Thought</h2>
+      <p>Digital freelancing isn't just a trend — it's a revolution. For Nepal, this is more than an economic opportunity; it's a gateway for youth to compete on a global stage without leaving their homeland. If you haven't started learning a digital skill yet, now is the time.</p>
+      
+      <div class="bg-gray-50 p-6 rounded-lg my-8">
+        <h3 class="text-xl font-semibold mb-4">📢 Want more posts like this?</h3>
+        <p>Follow my journey as I share insights, ideas, and stories from the evolving tech landscape of Nepal.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#DigitalFreelancing</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#NepalYouth</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#RemoteWork</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#DigitalEconomy</span>
+          <span class="text-xs px-3 py-1 bg-gray-200 rounded-full text-gray-700">#TechNepal</span>
+        </div>
+      </div>
+    `
+  },
+  {
     id: 5,
     title: "The Humane AI Pin is Here — Welcome to the Screenless Future",
     slug: "humane-ai-pin-screenless-future",

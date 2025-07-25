@@ -7,6 +7,16 @@ import BlogPostCard from './BlogPostCard';
 // Sample blog posts for the preview
 const recentBlogPosts = [
   {
+    id: 6,
+    title: "The Rise of Digital Freelancing Among Nepali Youth",
+    slug: "digital-freelancing-nepali-youth",
+    excerpt: "A silent revolution is reshaping how young Nepalis work and earn. Digital freelancing is becoming a top career path, offering financial independence and global opportunities.",
+    coverImage: "/src/assets/digital-freelancing-nepal.jpg",
+    date: "July 25, 2025",
+    tags: ["Freelancing", "Nepal", "Digital Economy"],
+    readTime: "4 min read"
+  },
+  {
     id: 5,
     title: "The Humane AI Pin is Here — Welcome to the Screenless Future",
     slug: "humane-ai-pin-screenless-future",
